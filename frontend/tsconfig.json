@@ -37,7 +37,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": "./src",
-    "paths": {
+    "paths": {      
       "mp4box": ["types/mp4box"],
       "@/*": ["*"]
     }
