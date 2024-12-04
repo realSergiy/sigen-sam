@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
-import useSettingsContext from '@/settings/useSettingsContext';
 import {Cog6ToothIcon} from '@heroicons/react/24/outline';
 import stylex from '@stylexjs/stylex';
 import {Suspense} from 'react';
 import {Button, Indicator} from 'react-daisyui';
-import {Outlet} from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const styles = stylex.create({
   container: {
@@ -51,8 +50,8 @@ const styles = stylex.create({
   },
 });
 
-export default function RootLayout() {
-  const {openModal, hasChanged} = useSettingsContext();
+export default function RootLayout({ children }) {
+  const router = useRouter();
 
   return (
     <div {...stylex.props(styles.container)}>
@@ -64,21 +63,14 @@ export default function RootLayout() {
               description="This may take a few moments, you're almost there!"
             />
           }>
-          <Outlet />
+          {children}
         </Suspense>
       </div>
       <div {...stylex.props(styles.debugActions)}>
         <Indicator>
-          {hasChanged && (
-            <Indicator.Item
-              className="badge badge-primary scale-50"
-              horizontal="start"
-              vertical="top"
-            />
-          )}
           <Button
             color="ghost"
-            onClick={openModal}
+            onClick={() => router.push('/settings')}
             shape="circle"
             size="xs"
             startIcon={<Cog6ToothIcon className="w-4 h-4" />}
