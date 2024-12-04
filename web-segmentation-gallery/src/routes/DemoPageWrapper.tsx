@@ -17,6 +17,7 @@ import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
 import DemoPage from '@/routes/DemoPage';
 import stylex from '@stylexjs/stylex';
 import {isFirefox} from 'react-device-detect';
+import { useRouter } from 'next/router';
 
 const styles = stylex.create({
   link: {
@@ -47,6 +48,7 @@ function isBrowserSupported() {
 
 export default function DemoPageWrapper() {
   const isBrowserUnsupported = !isBrowserSupported();
+  const router = useRouter();
 
   if (isBrowserUnsupported && isFirefox) {
     const nightlyUrl = 'https://wiki.mozilla.org/Nightly';
