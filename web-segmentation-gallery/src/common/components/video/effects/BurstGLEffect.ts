@@ -19,8 +19,8 @@ import {
   EffectFrameContext,
   EffectInit,
 } from '@/common/components/video/effects/Effect';
-import fragmentShaderSource from '@/common/components/video/effects/shaders/Burst.frag?raw';
-import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert?raw';
+import fragmentShaderSource from '@/common/components/video/effects/shaders/Burst.frag';
+import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import {Tracklet} from '@/common/tracker/Tracker';
 import {normalizeBounds, preAllocateTextures} from '@/common/utils/ShaderUtils';
 import {RLEObject, decode} from '@/jscocotools/mask';

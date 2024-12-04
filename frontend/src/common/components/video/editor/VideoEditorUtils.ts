@@ -167,7 +167,8 @@ export async function getDataURLFromImageData(
     return '';
   }
 
-  ctx?.putImageData(imageData, 0, 0);
+  // Since we checked ctx is not null above, we can safely assert it here
+  ctx.putImageData(imageData, 0, 0);
 
   if (canvas instanceof OffscreenCanvas) {
     const blob = await canvas.convertToBlob();

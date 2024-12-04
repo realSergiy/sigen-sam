@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {LogLevel} from '@/common/logger/Logger';
+import { LogLevel } from "@/common/logger/Logger";
 
 // Only enable debug logging in modes that are set in MODES_WITH_LOGGER. The
 // default is always error only.
 export const LOG_LEVEL: LogLevel =
-  import.meta.env.MODE === 'production' ? 'debug' : 'error';
+  process.env.NODE_ENV === "production" ? "debug" : "error";

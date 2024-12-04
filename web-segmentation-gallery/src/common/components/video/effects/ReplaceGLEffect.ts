@@ -21,8 +21,8 @@ import {
   EffectFrameContext,
   EffectInit,
 } from '@/common/components/video/effects/Effect';
-import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert?raw';
-import fragmentShaderSource from '@/common/components/video/effects/shaders/Replace.frag?raw';
+import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
+import fragmentShaderSource from '@/common/components/video/effects/shaders/Replace.frag';
 import {Tracklet} from '@/common/tracker/Tracker';
 import {normalizeBounds, preAllocateTextures} from '@/common/utils/ShaderUtils';
 import {RLEObject, decode} from '@/jscocotools/mask';
@@ -69,16 +69,16 @@ export default class ReplaceGLEffect extends BaseGLEffect {
     this._maskTextures = preAllocateTextures(gl, 3);
 
     this._bitmap = []; // clear any previous pool of texture
-
-    let response = await fetch(angeryIcon);
+    
+    let response = await fetch(angeryIcon.src);
     let blob = await response.blob();
     const angery = await createImageBitmap(blob);
-
-    response = await fetch(heartIcon);
+    
+    response = await fetch(heartIcon.src);
     blob = await response.blob();
     const heart = await createImageBitmap(blob);
-
-    response = await fetch(whistleIcon);
+    
+    response = await fetch(whistleIcon.src);
     blob = await response.blob();
     const whistle = await createImageBitmap(blob);
 

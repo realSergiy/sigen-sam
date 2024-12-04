@@ -18,8 +18,8 @@ import {
   EffectFrameContext,
   EffectInit,
 } from '@/common/components/video/effects/Effect';
-import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert?raw';
-import fragmentShaderSource from '@/common/components/video/effects/shaders/PixelateMask.frag?raw';
+import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
+import fragmentShaderSource from '@/common/components/video/effects/shaders/PixelateMask.frag';
 import {Tracklet} from '@/common/tracker/Tracker';
 import {preAllocateTextures} from '@/common/utils/ShaderUtils';
 import {RLEObject, decode} from '@/jscocotools/mask';

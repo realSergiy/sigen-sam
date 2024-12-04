@@ -13,62 +13,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import introVideo from '@/assets/videos/sam2_720px_dark.mp4';
-import introVideoPoster from '@/assets/videos/sam2_video_poster.png';
-import StaticVideoPlayer from '@/common/loading/StaticVideoPlayer';
-import {borderRadius, fontSize, spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-import {PropsWithChildren, ReactNode} from 'react';
-import {Link} from 'react-router-dom';
+import introVideo from "@/assets/videos/sam2_720px_dark.mp4";
+import introVideoPoster from "@/assets/videos/sam2_video_poster.png";
+import StaticVideoPlayer from "@/common/loading/StaticVideoPlayer";
+import { borderRadius, fontSize, spacing } from "@/theme/tokens.stylex";
+import stylex from "@stylexjs/stylex";
+import { PropsWithChildren, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 const styles = stylex.create({
   container: {
-    backgroundColor: '#000',
-    minHeight: '100%',
+    backgroundColor: "#000",
+    minHeight: "100%",
   },
   content: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: spacing[8],
-    maxWidth: '36rem', //* 576px */
-    marginHorizontal: 'auto',
+    maxWidth: "36rem", //* 576px */
+    marginHorizontal: "auto",
     paddingVertical: {
-      default: '6rem',
-      '@media screen and (max-width: 768px)': '3rem',
+      default: "6rem",
+      "@media screen and (max-width: 768px)": "3rem",
     },
     paddingHorizontal: spacing[8],
-    color: '#fff',
+    color: "#fff",
   },
   animationContainer: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   animation: {
-    border: '2px solid white',
-    borderRadius: borderRadius['xl'],
+    border: "2px solid white",
+    borderRadius: borderRadius["xl"],
     maxWidth: 450,
     maxHeight: 450,
-    height: '100%',
-    overflow: 'hidden',
-    '@media screen and (max-width: 768px)': {
+    height: "100%",
+    overflow: "hidden",
+    "@media screen and (max-width: 768px)": {
       height: 300,
       width: 300,
     },
   },
   title: {
-    textAlign: 'center',
-    lineHeight: '2rem',
-    fontSize: fontSize['2xl'],
+    textAlign: "center",
+    lineHeight: "2rem",
+    fontSize: fontSize["2xl"],
     fontWeight: 400,
   },
   description: {
-    textAlign: 'center',
-    color: '#A7B3BF',
+    textAlign: "center",
+    color: "#A7B3BF",
   },
   link: {
-    textAlign: 'center',
-    textDecorationLine: 'underline',
-    color: '#A7B3BF',
+    textAlign: "center",
+    textDecorationLine: "underline",
+    color: "#A7B3BF",
   },
 });
 
@@ -95,7 +95,7 @@ export default function LoadingStateScreen({
             <StaticVideoPlayer
               src={introVideo}
               aspectRatio="square"
-              poster={introVideoPoster}
+              poster={introVideoPoster.src}
               muted={true}
               loop={true}
               autoPlay={true}
