@@ -65,6 +65,7 @@ export const streamingStateAtom = atom<StreamingState>('none');
 export const isPlayingAtom = atom<boolean>(false);
 
 export const isStreamingAtom = atom<boolean>(false);
+export const navigationVideoAtom = atom<VideoData | null>(null);
 
 // #####################
 // OBJECTS

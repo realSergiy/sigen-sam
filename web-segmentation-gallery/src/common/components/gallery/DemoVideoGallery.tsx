@@ -1,28 +1,14 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import { DemoVideoGalleryQuery } from '@/common/components/gallery/__generated__/DemoVideoGalleryQuery.graphql';
 import VideoGalleryUploadVideo from '@/common/components/gallery/VideoGalleryUploadPhoto';
 import VideoPhoto from '@/common/components/gallery/VideoPhoto';
 import useScreenSize from '@/common/screen/useScreenSize';
-import { VideoData } from '@/demo/atoms';
+import { type VideoData, navigationVideoAtom } from '@/demo/atoms';
 import { DEMO_SHORT_NAME } from '@/demo/DemoConfig';
 import { useMemo } from 'react';
 import PhotoAlbum, { Photo, RenderPhotoProps } from 'react-photo-album';
 import { graphql, useLazyLoadQuery } from 'react-relay';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+import { useSetAtom } from 'jotai';
 
 type Props = {
   showUploadInGallery?: boolean;
@@ -45,8 +31,8 @@ export default function DemoVideoGallery({
   onUploadStart,
   onUploadError,
 }: Props) {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const setNavigationVideo = useSetAtom(navigationVideoAtom);
   const { isMobile: isMobileScreenSize } = useScreenSize();
 
   const data = useLazyLoadQuery<DemoVideoGalleryQuery>(
@@ -124,11 +110,8 @@ export default function DemoVideoGallery({
         poster={posterUrl}
         style={style}
         onClick={() => {
-          navigate(location.pathname, {
-            state: {
-              video,
-            },
-          });
+          setNavigationVideo(video);
+          router.push(location.pathname);
           onSelect?.(video);
         }}
       />
@@ -136,11 +119,8 @@ export default function DemoVideoGallery({
   };
 
   function handleUploadVideo(video: VideoData) {
-    navigate(location.pathname, {
-      state: {
-        video,
-      },
-    });
+    setNavigationVideo(video);
+    router.push(location.pathname);
     onUpload?.(video);
   }
 

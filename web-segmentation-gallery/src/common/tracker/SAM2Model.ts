@@ -468,7 +468,9 @@ export class SAM2Model extends Tracker {
           if (!success) {
             this._sendResponse<ClearPointsInVideoResponse>(
               'clearPointsInVideo',
-              { isSuccessful: false },
+              {
+                isSuccessful: false,
+              },
             );
             return;
           }

@@ -29,9 +29,7 @@ export default function MessagesSnackbar() {
 
   return (
     <div
-      className={`${
-        isMobile ? 'absolute bottom-2 left-2 right-2' : 'absolute right-2 top-2'
-      }`}
+      className={`${isMobile ? 'absolute bottom-2 left-2 right-2' : 'absolute right-2 top-2'}`}
     >
       <div
         className={`max-w-md rounded-lg border-2 p-5 text-sm text-white ${

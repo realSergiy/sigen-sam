@@ -55,9 +55,7 @@ export default function EffectsCarousel({
                   fontWeight={10}
                 />
                 <div
-                  className={`text-sm ${
-                    isActive ? 'font-bold text-[#FB73A5]' : 'font-medium'
-                  }`}
+                  className={`text-sm ${isActive ? 'font-bold text-[#FB73A5]' : 'font-medium'}`}
                 >
                   {title}
                 </div>

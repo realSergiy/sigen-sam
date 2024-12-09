@@ -1,6 +1,7 @@
 {
   "extends": [
     "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
     "plugin:import/recommended",
     "plugin:playwright/recommended",
@@ -50,7 +51,10 @@
     "unicorn/prefer-at": "off",
     "unicorn/prefer-dom-node-append": "off",
     "unicorn/prefer-math-trunc": "off",
-    "unicorn/prefer-type-error": "off"
+    "unicorn/prefer-type-error": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/no-empty-object-type": "off"
   },
   "overrides": [
     {

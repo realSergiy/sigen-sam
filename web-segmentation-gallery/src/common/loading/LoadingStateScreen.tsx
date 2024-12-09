@@ -2,7 +2,6 @@
 
 import StaticVideoPlayer from '@/common/loading/StaticVideoPlayer';
 import { PropsWithChildren, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 type Props = PropsWithChildren<{
   title: string;
@@ -41,14 +40,16 @@ export default function LoadingStateScreen({
           <div className="text-center text-gray-400">{description}</div>
         )}
         {children}
-        {linkProps != null && (
+        {/*
+        linkProps != null && (
           <Link
             to={linkProps.to}
             className="text-center text-gray-400 underline"
           >
             {linkProps.label}
           </Link>
-        )}
+        )
+        */}
       </div>
     </div>
   );

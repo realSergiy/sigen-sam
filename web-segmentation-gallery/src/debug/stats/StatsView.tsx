@@ -1,6 +1,6 @@
 import { EnableStatsRequest } from '@/common/components/video/VideoWorkerTypes';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 import useVideo from '../../common/components/video/editor/useVideo';
 import {
   GetMemoryStatsRequest,
@@ -12,18 +12,17 @@ import {
 const URL_PARAM = 'monitors';
 
 export default function StatsView() {
-  const { search } = useLocation();
+  const searchParams = useSearchParams();
   const video = useVideo();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isWrapped, setIsWrapped] = useState<boolean>(false);
 
   const isEnabled = useMemo(() => {
-    const urlSearchParams = new URLSearchParams(search);
     return (
-      urlSearchParams.has(URL_PARAM) &&
-      ['true', ''].includes(urlSearchParams.get('monitors') ?? '')
+      searchParams.has(URL_PARAM) &&
+      ['true', ''].includes(searchParams.get(URL_PARAM) ?? '')
     );
-  }, [search]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!isEnabled) {
