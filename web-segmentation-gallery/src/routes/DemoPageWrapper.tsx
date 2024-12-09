@@ -3,12 +3,16 @@
 import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
 import DemoPage from '@/routes/DemoPage';
 import { isFirefox } from 'react-device-detect';
+import RelayEnvironmentProvider from '@/graphql/RelayEnvironmentProvider';
+import { VIDEO_API_ENDPOINT } from '@/demo/DemoConfig';
+import DemoSuspenseFallback from '@/demo/DemoSuspenseFallback';
+import DemoErrorFallback from '@/demo/DemoErrorFallback';
 
 const REQUIRED_WINDOW_APIS = ['VideoEncoder', 'VideoDecoder', 'VideoFrame'];
 
 function isBrowserSupported() {
   for (const api of REQUIRED_WINDOW_APIS) {
-    if (!(api in window)) {
+    if (!(api in globalThis)) {
       return false;
     }
   }
@@ -63,5 +67,13 @@ export default function DemoPageWrapper() {
     );
   }
 
-  return <DemoPage />;
+  return (
+    <RelayEnvironmentProvider
+      endpoint={VIDEO_API_ENDPOINT}
+      suspenseFallback={<DemoSuspenseFallback />}
+      errorFallback={DemoErrorFallback}
+    >
+      <DemoPage />
+    </RelayEnvironmentProvider>
+  );
 }

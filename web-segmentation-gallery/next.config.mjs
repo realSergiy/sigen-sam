@@ -1,10 +1,7 @@
-import type { NextConfig } from 'next';
+// @ts-check
 
-//ToDo: switch to using turbo: https://nextjs.org/docs/app/api-reference/next-config-js/turbo#webpack-loaders
-
-const __dirname = new URL('.', import.meta.url).pathname;
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   webpack: (config, { isServer }) => {
     // add raw-loader for glsl, frag, and vert files
     config.module.rules.push({

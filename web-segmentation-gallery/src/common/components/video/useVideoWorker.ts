@@ -36,7 +36,7 @@ type CreateWorkerBridgeFunction = (
 
 export default function useVideoWorker(
   src: string,
-  canvasRef: RefObject<HTMLCanvasElement>,
+  canvasRef: RefObject<HTMLCanvasElement | null>,
   options: Options = {},
 ) {
   const isControlTransferredToOffscreenRef = useRef(false);

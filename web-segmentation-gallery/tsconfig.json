@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts, types/custom.d.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "next.config.mjs"
   ],
   "exclude": ["node_modules"]
 }
