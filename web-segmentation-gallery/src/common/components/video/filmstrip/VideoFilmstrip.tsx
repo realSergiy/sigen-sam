@@ -1,27 +1,11 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import SelectedFrameHelper from '@/common/components/video/filmstrip/SelectedFrameHelper';
-import {isPlayingAtom} from '@/demo/atoms';
-import stylex from '@stylexjs/stylex';
-import {useAtomValue, useSetAtom} from 'jotai';
-import {CanvasSpace, Pt} from 'pts';
-import {useCallback, useEffect, useMemo, useRef} from 'react';
-import {PtsCanvas, PtsCanvasImperative} from 'react-pts-canvas';
-import {VideoRef} from '../Video';
-import {DecodeEvent, FrameUpdateEvent} from '../VideoWorkerBridge';
+import { isPlayingAtom } from '@/demo/atoms';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { CanvasSpace, Pt } from 'pts';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { PtsCanvas, PtsCanvasImperative } from 'react-pts-canvas';
+import { VideoRef } from '../Video';
+import { DecodeEvent, FrameUpdateEvent } from '../VideoWorkerBridge';
 import useVideo from '../editor/useVideo';
 import {
   drawFilmstrip,
@@ -29,33 +13,8 @@ import {
   getPointerPosition,
   getTimeFromFrame,
 } from './FilmstripUtil';
-import {selectedFrameHelperAtom} from './atoms';
+import { selectedFrameHelperAtom } from './atoms';
 import useDisableScrolling from './useDisableScrolling';
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  filmstripWrapper: {
-    position: 'relative',
-    width: '100%',
-    height: '5rem' /* 80px */,
-  },
-  filmstrip: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    cursor: 'col-resize',
-    overflow: 'hidden',
-  },
-  canvas: {
-    width: '100%',
-    height: '100%',
-  },
-});
 
 export const PADDING_TOP = 30;
 export const PADDING_BOTTOM = 0;
@@ -67,7 +26,7 @@ export default function VideoFilmstrip() {
   const isPlayingOnPointerDownRef = useRef<boolean>(false);
   const isPlaying = useAtomValue(isPlayingAtom);
 
-  const {enable: enableScrolling, disable: disableScrolling} =
+  const { enable: enableScrolling, disable: disableScrolling } =
     useDisableScrolling();
 
   const pointerPositionRef = useRef<Pt | null>(null);
@@ -94,7 +53,7 @@ export default function VideoFilmstrip() {
   }, [setSelectedFrameHelper, selectedFrameHelper]);
 
   const computeFrame = useCallback(
-    (normalizedPosition: number): {index: number} | null => {
+    (normalizedPosition: number): { index: number } | null => {
       if (video == null) {
         return null;
       }
@@ -106,7 +65,7 @@ export default function VideoFilmstrip() {
       );
       // The frame is needed for the CAE model. Do we still want to support it?
       // return {image: decodedVideo.frames[index], index: index};
-      return {index};
+      return { index };
     },
     [video],
   );
@@ -220,11 +179,11 @@ export default function VideoFilmstrip() {
   }, [createFilmstrip, selectedFrameHelper, handleAnimate, video]);
 
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.filmstripWrapper)}>
-        <div {...stylex.props(styles.filmstrip)}>
+    <div className="flex flex-col">
+      <div className="relative h-20 w-full">
+        <div className="absolute bottom-0 left-0 right-0 top-0 cursor-col-resize overflow-hidden">
           <PtsCanvas
-            {...stylex.props(styles.canvas)}
+            className="h-full w-full"
             ref={ptsCanvasRef}
             background="transparent"
             resize={true}

@@ -1,22 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import {EnableStatsRequest} from '@/common/components/video/VideoWorkerTypes';
-import stylex from '@stylexjs/stylex';
-import {useEffect, useMemo, useRef, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import { EnableStatsRequest } from '@/common/components/video/VideoWorkerTypes';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import useVideo from '../../common/components/video/editor/useVideo';
 import {
   GetMemoryStatsRequest,
@@ -25,25 +9,10 @@ import {
   SetStatsCanvasResponse,
 } from './Stats';
 
-const styles = stylex.create({
-  container: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    overflowX: 'auto',
-    display: 'flex',
-    flexDirection: 'row',
-    cursor: 'pointer',
-    opacity: 0.9,
-    zIndex: 10000,
-  },
-});
-
 const URL_PARAM = 'monitors';
 
 export default function StatsView() {
-  const {search} = useLocation();
+  const { search } = useLocation();
   const video = useVideo();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isWrapped, setIsWrapped] = useState<boolean>(false);
@@ -126,8 +95,9 @@ export default function StatsView() {
   return (
     <div
       ref={containerRef}
-      {...stylex.props(styles.container)}
-      style={{flexWrap: isWrapped ? 'wrap' : 'unset'}}
+      className={`fixed left-0 top-0 z-[10000] flex w-full cursor-pointer flex-row overflow-x-auto opacity-90 ${
+        isWrapped ? 'flex-wrap' : 'flex-nowrap'
+      }`}
       onDoubleClick={handleClick}
     />
   );

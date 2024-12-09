@@ -1,74 +1,8 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import {VideoData} from '@/demo/atoms';
-import stylex, {StyleXStyles} from '@stylexjs/stylex';
-import {useSetAtom} from 'jotai';
-import {PropsWithChildren, RefObject, useEffect, useRef} from 'react';
-import Video, {VideoRef} from '../Video';
-import {videoAtom} from './atoms';
-
-const MAX_VIDEO_WIDTH = 1280;
-
-const styles = stylex.create({
-  editorContainer: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    borderRadius: '0.375rem',
-    overflow: {
-      default: 'clip',
-      '@media screen and (max-width: 768px)': 'visible',
-    },
-  },
-  videoContainer: {
-    position: 'relative',
-    flexGrow: 1,
-    overflow: 'hidden',
-    width: '100%',
-    maxWidth: MAX_VIDEO_WIDTH,
-  },
-  layers: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-  },
-  loadingMessage: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    padding: '6px 10px',
-    backgroundColor: '#6441D2CC',
-    color: '#FFF',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    borderRadius: '8px',
-    fontSize: '0.8rem',
-  },
-});
-
-export type InteractionLayerProps = {
-  style: StyleXStyles;
-  videoRef: RefObject<VideoRef>;
-};
+import { VideoData } from '@/demo/atoms';
+import { useSetAtom } from 'jotai';
+import { PropsWithChildren, useEffect, useRef } from 'react';
+import Video, { VideoRef } from '../Video';
+import { videoAtom } from './atoms';
 
 export type ControlsProps = {
   isPlaying: boolean;
@@ -102,8 +36,8 @@ export default function VideoEditor({
   }, [setVideo]);
 
   return (
-    <div {...stylex.props(styles.editorContainer)}>
-      <div {...stylex.props(styles.videoContainer)}>
+    <div className="relative flex h-full w-full flex-col items-center overflow-clip rounded-md md:overflow-visible">
+      <div className="relative w-full max-w-[1280px] flex-grow overflow-hidden">
         <Video
           ref={videoRef}
           src={inputVideo.url}
@@ -111,7 +45,7 @@ export default function VideoEditor({
           height={inputVideo.height}
           loading={loading}
         />
-        <div {...stylex.props(styles.layers)}>{layers}</div>
+        <div className="absolute bottom-0 left-0 right-0 top-0">{layers}</div>
       </div>
       {children}
     </div>

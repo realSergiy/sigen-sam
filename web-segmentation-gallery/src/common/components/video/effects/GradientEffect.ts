@@ -20,10 +20,10 @@ import {
 } from '@/common/components/video/effects/Effect';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Gradient.frag';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {generateLUTDATA, load3DLUT} from '@/common/utils/ShaderUtils';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { generateLUTDATA, load3DLUT } from '@/common/utils/ShaderUtils';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class GradientEffect extends BaseGLEffect {
   private lutSize: number = 2;

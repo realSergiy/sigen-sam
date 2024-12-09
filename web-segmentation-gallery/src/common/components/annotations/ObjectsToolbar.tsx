@@ -18,7 +18,7 @@ import FirstClickView from '@/common/components/annotations/FirstClickView';
 import LimitNotice from '@/common/components/annotations/LimitNotice';
 import ObjectsToolbarBottomActions from '@/common/components/annotations/ObjectsToolbarBottomActions';
 import ObjectsToolbarHeader from '@/common/components/annotations/ObjectsToolbarHeader';
-import {getObjectLabel} from '@/common/components/annotations/ObjectUtils';
+import { getObjectLabel } from '@/common/components/annotations/ObjectUtils';
 import ToolbarObject from '@/common/components/annotations/ToolbarObject';
 import {
   activeTrackletObjectAtom,
@@ -28,13 +28,13 @@ import {
   isTrackletObjectLimitReachedAtom,
   trackletObjectsAtom,
 } from '@/demo/atoms';
-import {useAtomValue, useSetAtom} from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function ObjectsToolbar({onTabChange}: Props) {
+export default function ObjectsToolbar({ onTabChange }: Props) {
   const tracklets = useAtomValue(trackletObjectsAtom);
   const activeTracklet = useAtomValue(activeTrackletObjectAtom);
   const setActiveTrackletId = useSetAtom(activeTrackletObjectIdAtom);
@@ -47,9 +47,9 @@ export default function ObjectsToolbar({onTabChange}: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <ObjectsToolbarHeader />
-      <div className="grow w-full overflow-y-auto">
+      <div className="w-full grow overflow-y-auto">
         {tracklets.map(tracklet => {
           return (
             <ToolbarObject

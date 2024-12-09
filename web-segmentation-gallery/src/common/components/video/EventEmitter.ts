@@ -24,7 +24,7 @@ export class EventEmitter<WorkerEventMap> {
   trigger<K extends keyof WorkerEventMap>(type: K, ev: WorkerEventMap[K]) {
     this.listeners
       .filter(listener => type === listener.type)
-      .forEach(({listener}) => {
+      .forEach(({ listener }) => {
         setTimeout(() => listener(ev), 0);
       });
   }
@@ -34,7 +34,7 @@ export class EventEmitter<WorkerEventMap> {
     listener: (ev: WorkerEventMap[K]) => unknown,
   ): void {
     // @ts-expect-error Incorrect typing. Not sure how to correctly type it
-    this.listeners.push({type, listener});
+    this.listeners.push({ type, listener });
   }
 
   removeEventListener<K extends keyof WorkerEventMap>(

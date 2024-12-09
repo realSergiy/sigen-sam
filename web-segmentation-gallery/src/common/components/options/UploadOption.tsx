@@ -17,27 +17,27 @@ import useUploadVideo from '@/common/components/gallery/useUploadVideo';
 import OptionButton from '@/common/components/options/OptionButton';
 import Logger from '@/common/logger/Logger';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {sessionAtom, uploadingStateAtom} from '@/demo/atoms';
-import {MAX_UPLOAD_FILE_SIZE} from '@/demo/DemoConfig';
-import {Close, CloudUpload} from '@carbon/icons-react';
-import {useSetAtom} from 'jotai';
-import {useNavigate} from 'react-router-dom';
+import { sessionAtom, uploadingStateAtom } from '@/demo/atoms';
+import { MAX_UPLOAD_FILE_SIZE } from '@/demo/DemoConfig';
+import { Close, CloudUpload } from '@carbon/icons-react';
+import { useSetAtom } from 'jotai';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   onUpload: () => void;
 };
 
-export default function UploadOption({onUpload}: Props) {
+export default function UploadOption({ onUpload }: Props) {
   const navigate = useNavigate();
-  const {isMobile} = useScreenSize();
+  const { isMobile } = useScreenSize();
   const setUploadingState = useSetAtom(uploadingStateAtom);
   const setSession = useSetAtom(sessionAtom);
 
-  const {getRootProps, getInputProps, isUploading, error} = useUploadVideo({
+  const { getRootProps, getInputProps, isUploading, error } = useUploadVideo({
     onUpload: videoData => {
       navigate(
-        {pathname: location.pathname, search: location.search},
-        {state: {video: videoData}},
+        { pathname: location.pathname, search: location.search },
+        { state: { video: videoData } },
       );
       onUpload();
       setUploadingState('default');
@@ -78,7 +78,7 @@ export default function UploadOption({onUpload}: Props) {
           )
         }
         Icon={error !== null ? Close : CloudUpload}
-        loadingProps={{loading: isUploading, label: 'Uploading...'}}
+        loadingProps={{ loading: isUploading, label: 'Uploading...' }}
         onClick={() => {}}
       />
     </div>

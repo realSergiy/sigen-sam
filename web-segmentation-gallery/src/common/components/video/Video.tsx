@@ -1,85 +1,39 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import {BaseTracklet, SegmentationPoint} from '@/common/tracker/Tracker';
-import {TrackerOptions, Trackers} from '@/common/tracker/Trackers';
-import {PauseFilled, PlayFilledAlt} from '@carbon/icons-react';
-import stylex, {StyleXStyles} from '@stylexjs/stylex';
+import { BaseTracklet, SegmentationPoint } from '@/common/tracker/Tracker';
+import { TrackerOptions, Trackers } from '@/common/tracker/Trackers';
+import { PauseFilled, PlayFilledAlt } from '@carbon/icons-react';
 import {
-  CSSProperties,
   forwardRef,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
 } from 'react';
-import {Button} from 'react-daisyui';
+import { Button } from 'react-daisyui';
 
-import {EffectIndex, Effects} from '@/common/components/video/effects/Effects';
+import {
+  EffectIndex,
+  Effects,
+} from '@/common/components/video/effects/Effects';
 import useReportError from '@/common/error/useReportError';
 import Logger from '@/common/logger/Logger';
-import {isPlayingAtom, isVideoLoadingAtom} from '@/demo/atoms';
-import {color} from '@/theme/tokens.stylex';
-import {useAtom} from 'jotai';
+import { isPlayingAtom, isVideoLoadingAtom } from '@/demo/atoms';
+import { useAtom } from 'jotai';
 import useResizeObserver from 'use-resize-observer';
 import VideoLoadingOverlay from './VideoLoadingOverlay';
 import {
   StreamingStateUpdateEvent,
   VideoWorkerEventMap,
 } from './VideoWorkerBridge';
-import {EffectOptions} from './effects/Effect';
+import { EffectOptions } from './effects/Effect';
 import useVideoWorker from './useVideoWorker';
-
-const styles = stylex.create({
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-  },
-  canvasContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: color['gray-800'],
-    width: '100%',
-    height: '100%',
-  },
-  controls: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    padding: 8,
-    background: 'linear-gradient(#00000000, #000000ff)',
-  },
-  controlButton: {
-    color: 'white',
-  },
-});
 
 type Props = {
   src: string;
   width: number;
   height: number;
   loading?: boolean;
-  containerStyle?: StyleXStyles<{
-    position: CSSProperties['position'];
-  }>;
-  canvasStyle?: StyleXStyles<{
-    width: CSSProperties['width'];
-  }>;
+  containerPositionStyle?: string;
+  canvasWidthStyle?: string;
   controls?: boolean;
   createVideoWorker?: () => Worker;
 };
@@ -130,8 +84,8 @@ export default forwardRef<VideoRef, Props>(function Video(
     src,
     width,
     height,
-    containerStyle,
-    canvasStyle,
+    containerPositionStyle,
+    canvasWidthStyle,
     createVideoWorker,
     controls = false,
     loading = false,
@@ -330,14 +284,14 @@ export default forwardRef<VideoRef, Props>(function Video(
 
   return (
     <div
-      {...stylex.props(containerStyle ?? styles.container)}
-      ref={resizeObserverRef}>
-      <div {...stylex.props(styles.canvasContainer)}>
+      className={containerPositionStyle ?? `relative h-full w-full`}
+      ref={resizeObserverRef}
+    >
+      <div className="flex h-full w-full items-center justify-center bg-gray-800">
         {(isVideoLoading || loading) && <VideoLoadingOverlay />}
         <canvas
           ref={canvasRef}
-          {...stylex.props(canvasStyle)}
-          className="lg:rounded-[4px]"
+          className={`lg:rounded-[4px] ${canvasWidthStyle}`}
           width={width}
           height={height}
           style={{
@@ -346,21 +300,15 @@ export default forwardRef<VideoRef, Props>(function Video(
         />
       </div>
       {controls && (
-        <div {...stylex.props(styles.controls)}>
+        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-2">
           <Button
             color="ghost"
             size="xs"
             startIcon={
               isPlaying ? (
-                <PauseFilled
-                  {...stylex.props(styles.controlButton)}
-                  size={14}
-                />
+                <PauseFilled className="text-white" size={14} />
               ) : (
-                <PlayFilledAlt
-                  {...stylex.props(styles.controlButton)}
-                  size={14}
-                />
+                <PlayFilledAlt className="text-white" size={14} />
               )
             }
             onClick={() => {

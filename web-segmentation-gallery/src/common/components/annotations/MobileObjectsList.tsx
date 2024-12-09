@@ -15,26 +15,10 @@
  */
 import ClearAllPointsInVideoButton from '@/common/components/annotations/ClearAllPointsInVideoButton';
 import ObjectThumbnail from '@/common/components/annotations/ObjectThumbnail';
-import {OBJECT_TOOLBAR_INDEX} from '@/common/components/toolbar/ToolbarConfig';
-import {BaseTracklet} from '@/common/tracker/Tracker';
-import {activeTrackletObjectIdAtom, trackletObjectsAtom} from '@/demo/atoms';
-import {spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-import {useAtomValue, useSetAtom} from 'jotai';
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    padding: spacing[5],
-    borderTop: '1px solid #DEE3E9',
-  },
-  trackletsContainer: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    gap: spacing[5],
-  },
-});
+import { OBJECT_TOOLBAR_INDEX } from '@/common/components/toolbar/ToolbarConfig';
+import { BaseTracklet } from '@/common/tracker/Tracker';
+import { activeTrackletObjectIdAtom, trackletObjectsAtom } from '@/demo/atoms';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 type Props = {
   showActiveObject: () => void;
@@ -54,10 +38,10 @@ export default function MobileObjectsList({
   }
 
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.trackletsContainer)}>
+    <div className="flex border-t border-gray-200 p-5">
+      <div className="flex flex-grow items-center gap-5">
         {tracklets.map(tracklet => {
-          const {id, color, thumbnail} = tracklet;
+          const { id, color, thumbnail } = tracklet;
           return (
             <ObjectThumbnail
               key={id}

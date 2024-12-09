@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {ImageFrame} from '@/common/codecs/VideoDecoder';
-import {MP4ArrayBuffer, createFile} from 'mp4box';
+import { ImageFrame } from '@/common/codecs/VideoDecoder';
+import { MP4ArrayBuffer, createFile } from 'mp4box';
 
 // The selection of timescale and seconds/key-frame value are
 // explained in the following docs: https://github.com/vjeux/mp4-h264-re-encode
@@ -104,7 +104,7 @@ export function encode(
       }
 
       for await (const frame of framesGenerator) {
-        const {bitmap, duration, timestamp} = frame;
+        const { bitmap, duration, timestamp } = frame;
         durations.push(duration);
         let keyFrame = false;
         if (timestamp >= nextKeyFrameTimestamp) {
@@ -112,7 +112,7 @@ export function encode(
           keyFrame = true;
           nextKeyFrameTimestamp = timestamp + SECONDS_PER_KEY_FRAME * 1e6;
         }
-        encoder.encode(bitmap, {keyFrame});
+        encoder.encode(bitmap, { keyFrame });
         bitmap.close();
       }
 

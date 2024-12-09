@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {useAtom} from 'jotai';
-import {useEffect, useRef} from 'react';
-import {Message, messageAtom} from '@/common/components/snackbar/snackbarAtoms';
+import { useAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
+import {
+  Message,
+  messageAtom,
+} from '@/common/components/snackbar/snackbarAtoms';
 
 export default function useExpireMessage() {
   const [message, setMessage] = useAtom(messageAtom);

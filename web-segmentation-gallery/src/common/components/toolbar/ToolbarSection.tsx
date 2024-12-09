@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {PropsWithChildren} from 'react';
+import { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<{
   title: string;
@@ -27,8 +27,8 @@ export default function ToolbarSection({
 }: Props) {
   return (
     <div className={`p-6 ${borderBottom && 'border-b border-black'}`}>
-      <div className="font-bold ml-2">{title}</div>
-      <div className="grid grid-cols-4 gap-2 mt-2 md:mt-6">{children}</div>
+      <div className="ml-2 font-bold">{title}</div>
+      <div className="mt-2 grid grid-cols-4 gap-2 md:mt-6">{children}</div>
     </div>
   );
 }

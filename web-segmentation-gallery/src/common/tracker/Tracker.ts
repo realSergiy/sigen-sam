@@ -15,9 +15,9 @@
  */
 import VideoWorkerContext from '@/common/components/video/VideoWorkerContext';
 
-import {TrackerOptions} from '@/common/tracker/Trackers';
-import {TrackerResponse} from '@/common/tracker/TrackerTypes';
-import {RLEObject} from '@/jscocotools/mask';
+import { TrackerOptions } from '@/common/tracker/Trackers';
+import { TrackerResponse } from '@/common/tracker/TrackerTypes';
+import { RLEObject } from '@/jscocotools/mask';
 
 export type Point = [x: number, y: number];
 

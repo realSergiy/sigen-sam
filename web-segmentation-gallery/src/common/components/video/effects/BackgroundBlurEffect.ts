@@ -20,9 +20,9 @@ import {
 } from '@/common/components/video/effects/Effect';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/BackgroundBlur.frag';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
-import {Tracklet} from '@/common/tracker/Tracker';
+import { Tracklet } from '@/common/tracker/Tracker';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class BackgroundBlurEffect extends BaseGLEffect {
   private _blurRadius: number = 3;

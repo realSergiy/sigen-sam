@@ -20,10 +20,10 @@ import {
 } from '@/common/components/video/effects/Effect';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/NoisyMask.frag';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class NoisyMaskEffect extends BaseGLEffect {
   private _numMasks: number = 0;

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {useCloseSessionBeforeUnloadMutation$variables} from '@/common/components/session/__generated__/useCloseSessionBeforeUnloadMutation.graphql';
-import {sessionAtom} from '@/demo/atoms';
-import useSettingsContext from '@/settings/useSettingsContext';
-import {useAtomValue} from 'jotai';
-import {useEffect, useMemo} from 'react';
-import {ConcreteRequest, graphql} from 'relay-runtime';
+import { useCloseSessionBeforeUnloadMutation$variables } from '@/common/components/session/__generated__/useCloseSessionBeforeUnloadMutation.graphql';
+import { sessionAtom } from '@/demo/atoms';
+import { INFERENCE_API_ENDPOINT } from '@/demo/DemoConfig';
+import { useAtomValue } from 'jotai';
+import { useEffect, useMemo } from 'react';
+import { ConcreteRequest, graphql } from 'relay-runtime';
 
 /**
  * The useCloseSessionBeforeUnload is a dirty workaround to send close session
@@ -31,7 +31,6 @@ import {ConcreteRequest, graphql} from 'relay-runtime';
  */
 export default function useCloseSessionBeforeUnload() {
   const session = useAtomValue(sessionAtom);
-  const {settings} = useSettingsContext();
 
   const data = useMemo(() => {
     if (session == null) {
@@ -69,7 +68,7 @@ export default function useCloseSessionBeforeUnload() {
         return;
       }
 
-      fetch(`${settings.inferenceAPIEndpoint}/graphql`, {
+      fetch(`${INFERENCE_API_ENDPOINT}/graphql`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -83,5 +82,5 @@ export default function useCloseSessionBeforeUnload() {
     return () => {
       window.removeEventListener('beforeunload', onBeforeUpload);
     };
-  }, [data, session, settings.inferenceAPIEndpoint]);
+  }, [data, session]);
 }

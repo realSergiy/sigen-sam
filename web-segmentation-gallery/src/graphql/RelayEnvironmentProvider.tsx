@@ -1,3 +1,5 @@
+`use client`;
+
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
@@ -15,7 +17,7 @@
  */
 import ErrorFallback from '@/common/error/ErrorFallback';
 import LoadingMessage from '@/common/loading/LoadingMessage';
-import {createEnvironment} from '@/graphql/RelayEnvironment';
+import { createEnvironment } from '@/graphql/RelayEnvironment';
 import {
   ComponentType,
   PropsWithChildren,
@@ -24,8 +26,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import {ErrorBoundary, FallbackProps} from 'react-error-boundary';
-import {RelayEnvironmentProvider} from 'react-relay';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { RelayEnvironmentProvider } from 'react-relay';
 
 type Props = PropsWithChildren<{
   suspenseFallback?: ReactNode;

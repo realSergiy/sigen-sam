@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {EffectIndex, Effects} from '@/common/components/video/effects/Effects';
-import {registerSerializableConstructors} from '@/common/error/ErrorSerializationUtils';
+import {
+  EffectIndex,
+  Effects,
+} from '@/common/components/video/effects/Effects';
+import { registerSerializableConstructors } from '@/common/error/ErrorSerializationUtils';
 import {
   BaseTracklet,
   SegmentationPoint,
@@ -42,10 +45,10 @@ import {
   TrackletDeletedResponse,
   UpdatePointsRequest,
 } from '@/common/tracker/TrackerTypes';
-import {TrackerOptions, Trackers} from '@/common/tracker/Trackers';
-import {MP4ArrayBuffer} from 'mp4box';
-import {deserializeError, type ErrorObject} from 'serialize-error';
-import {EventEmitter} from './EventEmitter';
+import { TrackerOptions, Trackers } from '@/common/tracker/Trackers';
+import { MP4ArrayBuffer } from 'mp4box';
+import { deserializeError, type ErrorObject } from 'serialize-error';
+import { EventEmitter } from './EventEmitter';
 import {
   EncodeVideoRequest,
   FilmstripRequest,
@@ -60,7 +63,7 @@ import {
   VideoWorkerRequest,
   VideoWorkerResponseMessageEvent,
 } from './VideoWorkerTypes';
-import {EffectOptions} from './effects/Effect';
+import { EffectOptions } from './effects/Effect';
 
 registerSerializableConstructors();
 
@@ -292,7 +295,7 @@ export default class VideoWorkerBridge extends EventEmitter<VideoWorkerEventMap>
   }
 
   public set frame(index: number) {
-    this.sendRequest<FrameUpdateRequest>('frameUpdate', {index});
+    this.sendRequest<FrameUpdateRequest>('frameUpdate', { index });
   }
 
   createFilmstrip(width: number, height: number): Promise<ImageBitmap> {
@@ -394,7 +397,7 @@ export default class VideoWorkerBridge extends EventEmitter<VideoWorkerEventMap>
         }
       };
       this.worker.addEventListener('message', handleResponse);
-      this.sendRequest<DeleteTrackletRequest>('deleteTracklet', {trackletId});
+      this.sendRequest<DeleteTrackletRequest>('deleteTracklet', { trackletId });
     });
   }
 

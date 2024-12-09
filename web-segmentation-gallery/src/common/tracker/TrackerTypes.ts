@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {SegmentationPoint} from '@/common/tracker/Tracker';
-import {TrackerOptions, Trackers} from '@/common/tracker/Trackers';
+import { SegmentationPoint } from '@/common/tracker/Tracker';
+import { TrackerOptions, Trackers } from '@/common/tracker/Trackers';
 import {
   AddPointsEvent,
   ClearPointsInVideoEvent,

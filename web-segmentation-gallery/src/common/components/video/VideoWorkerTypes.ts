@@ -23,8 +23,8 @@ import {
   LoadStartEvent,
   RenderingErrorEvent,
 } from './VideoWorkerBridge';
-import {EffectOptions} from './effects/Effect';
-import type {Effects} from './effects/Effects';
+import { EffectOptions } from './effects/Effect';
+import type { Effects } from './effects/Effects';
 
 export type Request<A, P> = {
   action: A;

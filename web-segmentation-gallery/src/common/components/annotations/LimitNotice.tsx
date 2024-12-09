@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {InformationFilled} from '@carbon/icons-react';
+import { InformationFilled } from '@carbon/icons-react';
 
 export default function LimitNotice() {
   return (
-    <div className="mt-6 gap-3 mx-6 flex items-center text-gray-400">
+    <div className="mx-6 mt-6 flex items-center gap-3 text-gray-400">
       <div>
         <InformationFilled size={32} />
       </div>

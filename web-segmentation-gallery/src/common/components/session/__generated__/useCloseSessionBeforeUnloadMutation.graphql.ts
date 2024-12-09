@@ -25,68 +25,68 @@ export type useCloseSessionBeforeUnloadMutation = {
   variables: useCloseSessionBeforeUnloadMutation$variables;
 };
 
-const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
-  {
-    "alias": null,
-    "args": [
+const node: ConcreteRequest = (function () {
+  var v0 = [
       {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input"
-      }
+        defaultValue: null,
+        kind: 'LocalArgument',
+        name: 'input',
+      },
     ],
-    "concreteType": "CloseSession",
-    "kind": "LinkedField",
-    "name": "closeSession",
-    "plural": false,
-    "selections": [
+    v1 = [
       {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "success",
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  }
-];
-return {
-  "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "useCloseSessionBeforeUnloadMutation",
-    "selections": (v1/*: any*/),
-    "type": "Mutation",
-    "abstractKey": null
-  },
-  "kind": "Request",
-  "operation": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Operation",
-    "name": "useCloseSessionBeforeUnloadMutation",
-    "selections": (v1/*: any*/)
-  },
-  "params": {
-    "cacheID": "99b73bd43a9f74104d545778cebbd15c",
-    "id": null,
-    "metadata": {},
-    "name": "useCloseSessionBeforeUnloadMutation",
-    "operationKind": "mutation",
-    "text": "mutation useCloseSessionBeforeUnloadMutation(\n  $input: CloseSessionInput!\n) {\n  closeSession(input: $input) {\n    success\n  }\n}\n"
-  }
-};
+        alias: null,
+        args: [
+          {
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'input',
+          },
+        ],
+        concreteType: 'CloseSession',
+        kind: 'LinkedField',
+        name: 'closeSession',
+        plural: false,
+        selections: [
+          {
+            alias: null,
+            args: null,
+            kind: 'ScalarField',
+            name: 'success',
+            storageKey: null,
+          },
+        ],
+        storageKey: null,
+      },
+    ];
+  return {
+    fragment: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Fragment',
+      metadata: null,
+      name: 'useCloseSessionBeforeUnloadMutation',
+      selections: v1 /*: any*/,
+      type: 'Mutation',
+      abstractKey: null,
+    },
+    kind: 'Request',
+    operation: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Operation',
+      name: 'useCloseSessionBeforeUnloadMutation',
+      selections: v1 /*: any*/,
+    },
+    params: {
+      cacheID: '99b73bd43a9f74104d545778cebbd15c',
+      id: null,
+      metadata: {},
+      name: 'useCloseSessionBeforeUnloadMutation',
+      operationKind: 'mutation',
+      text: 'mutation useCloseSessionBeforeUnloadMutation(\n  $input: CloseSessionInput!\n) {\n  closeSession(input: $input) {\n    success\n  }\n}\n',
+    },
+  };
 })();
 
-(node as any).hash = "55dd870645c9736b797b90819ddb1b92";
+(node as any).hash = '55dd870645c9736b797b90819ddb1b92';
 
 export default node;

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 import ChangeVideoModal from '@/common/components/gallery/ChangeVideoModal';
-import type {VideoGalleryTriggerProps} from '@/common/components/gallery/DemoVideoGalleryModal';
+import type { VideoGalleryTriggerProps } from '@/common/components/gallery/DemoVideoGalleryModal';
 import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
-import {uploadingStateAtom} from '@/demo/atoms';
-import {ImageCopy} from '@carbon/icons-react';
-import {useAtomValue} from 'jotai';
+import { uploadingStateAtom } from '@/demo/atoms';
+import { ImageCopy } from '@carbon/icons-react';
+import { useAtomValue } from 'jotai';
 import OptionButton from '../components/options/OptionButton';
 
 export default function UploadLoadingScreen() {
@@ -28,8 +28,9 @@ export default function UploadLoadingScreen() {
     return (
       <LoadingStateScreen
         title="Uh oh, we cannot process this video"
-        description="Please upload another video, and make sure that the video’s file size is less than 70Mb. ">
-        <div className="max-w-[250px] w-full mx-auto">
+        description="Please upload another video, and make sure that the video’s file size is less than 70Mb. "
+      >
+        <div className="mx-auto w-full max-w-[250px]">
           <ChangeVideoModal
             videoGalleryModalTrigger={UploadLoadingScreenChangeVideoTrigger}
           />

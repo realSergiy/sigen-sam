@@ -47,7 +47,7 @@ function rleInit(R: RLE, h: number, w: number, m: number, cnts: number[]) {
 function rlesInit(R: RLE[], n: number) {
   let i;
   for (i = 0; i < n; i++) {
-    R[i] = {h: 0, w: 0, m: 0, cnts: [0]};
+    R[i] = { h: 0, w: 0, m: 0, cnts: [0] };
     rleInit(R[i], 0, 0, 0, [0]);
   }
 }

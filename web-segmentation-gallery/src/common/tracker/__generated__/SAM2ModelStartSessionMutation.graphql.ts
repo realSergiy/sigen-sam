@@ -25,68 +25,68 @@ export type SAM2ModelStartSessionMutation = {
   variables: SAM2ModelStartSessionMutation$variables;
 };
 
-const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
-  {
-    "alias": null,
-    "args": [
+const node: ConcreteRequest = (function () {
+  var v0 = [
       {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input"
-      }
+        defaultValue: null,
+        kind: 'LocalArgument',
+        name: 'input',
+      },
     ],
-    "concreteType": "StartSession",
-    "kind": "LinkedField",
-    "name": "startSession",
-    "plural": false,
-    "selections": [
+    v1 = [
       {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "sessionId",
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  }
-];
-return {
-  "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "SAM2ModelStartSessionMutation",
-    "selections": (v1/*: any*/),
-    "type": "Mutation",
-    "abstractKey": null
-  },
-  "kind": "Request",
-  "operation": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Operation",
-    "name": "SAM2ModelStartSessionMutation",
-    "selections": (v1/*: any*/)
-  },
-  "params": {
-    "cacheID": "2403f5005f5bb3805109874569f2050e",
-    "id": null,
-    "metadata": {},
-    "name": "SAM2ModelStartSessionMutation",
-    "operationKind": "mutation",
-    "text": "mutation SAM2ModelStartSessionMutation(\n  $input: StartSessionInput!\n) {\n  startSession(input: $input) {\n    sessionId\n  }\n}\n"
-  }
-};
+        alias: null,
+        args: [
+          {
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'input',
+          },
+        ],
+        concreteType: 'StartSession',
+        kind: 'LinkedField',
+        name: 'startSession',
+        plural: false,
+        selections: [
+          {
+            alias: null,
+            args: null,
+            kind: 'ScalarField',
+            name: 'sessionId',
+            storageKey: null,
+          },
+        ],
+        storageKey: null,
+      },
+    ];
+  return {
+    fragment: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Fragment',
+      metadata: null,
+      name: 'SAM2ModelStartSessionMutation',
+      selections: v1 /*: any*/,
+      type: 'Mutation',
+      abstractKey: null,
+    },
+    kind: 'Request',
+    operation: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Operation',
+      name: 'SAM2ModelStartSessionMutation',
+      selections: v1 /*: any*/,
+    },
+    params: {
+      cacheID: '2403f5005f5bb3805109874569f2050e',
+      id: null,
+      metadata: {},
+      name: 'SAM2ModelStartSessionMutation',
+      operationKind: 'mutation',
+      text: 'mutation SAM2ModelStartSessionMutation(\n  $input: StartSessionInput!\n) {\n  startSession(input: $input) {\n    sessionId\n  }\n}\n',
+    },
+  };
 })();
 
-(node as any).hash = "5cf0005c7a54fc87c539dd4cbd5fef5d";
+(node as any).hash = '5cf0005c7a54fc87c539dd4cbd5fef5d';
 
 export default node;

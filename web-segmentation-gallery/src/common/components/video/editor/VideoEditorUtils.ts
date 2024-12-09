@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Mask, Tracklet } from "@/common/tracker/Tracker";
+import { Mask, Tracklet } from '@/common/tracker/Tracker';
 import {
   convertVideoFrameToImageData,
   findBoundingBox,
-} from "@/common/utils/ImageUtils";
-import { DataArray } from "@/jscocotools/mask";
-import invariant from "invariant";
+} from '@/common/utils/ImageUtils';
+import { DataArray } from '@/jscocotools/mask';
+import invariant from 'invariant';
 
 function getCanvas(
   width: number,
   height: number,
-  isOffscreen: boolean = false
+  isOffscreen: boolean = false,
 ): HTMLCanvasElement | OffscreenCanvas {
-  if (isOffscreen || typeof document === "undefined") {
+  if (isOffscreen || typeof document === 'undefined') {
     return new OffscreenCanvas(width, height);
   }
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   return canvas;
@@ -39,7 +39,7 @@ export function drawFrame(
   ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
   frame: VideoFrame | HTMLImageElement,
   width: number,
-  height: number
+  height: number,
 ) {
   ctx?.drawImage(frame, 0, 0, width, height);
 }
@@ -49,7 +49,7 @@ export function drawFrame(
  */
 export function getThumbnailImageDataOld(
   mask: DataArray,
-  videoFrame: VideoFrame
+  videoFrame: VideoFrame,
 ): ImageData | null {
   const data = mask.data;
   if (!ArrayBuffer.isView(data) || !(data instanceof Uint8Array)) {
@@ -89,7 +89,7 @@ export function getThumbnailImageDataOld(
   const rotatedData = new ImageData(
     transformedData,
     mask.shape[1],
-    mask.shape[0]
+    mask.shape[0],
   ); // flip w and h of the mask
 
   return boundingBox.crop(rotatedData);
@@ -102,7 +102,7 @@ export function getThumbnailImageDataOld(
 function getThumbnailImageData(
   mask: Mask,
   maskCtx: OffscreenCanvasRenderingContext2D,
-  frameBitmap: ImageBitmap
+  frameBitmap: ImageBitmap,
 ): ImageData | null {
   const x = mask.bounds[0][0];
   const y = mask.bounds[0][1];
@@ -116,11 +116,11 @@ function getThumbnailImageData(
   const thumbnailMaskData = maskCtx.getImageData(x, y, w, h);
 
   const canvas = new OffscreenCanvas(w, h);
-  const ctx = canvas.getContext("2d");
-  invariant(ctx !== null, "2d context cannot be null");
+  const ctx = canvas.getContext('2d');
+  invariant(ctx !== null, '2d context cannot be null');
 
   ctx.putImageData(thumbnailMaskData, 0, 0);
-  ctx.globalCompositeOperation = "source-in";
+  ctx.globalCompositeOperation = 'source-in';
   ctx.drawImage(frameBitmap, x, y, w, h, 0, 0, w, h);
 
   return ctx.getImageData(0, 0, w, h);
@@ -131,19 +131,19 @@ export async function generateThumbnail(
   frameIndex: number,
   mask: Mask,
   frame: VideoFrame,
-  ctx: OffscreenCanvasRenderingContext2D
+  ctx: OffscreenCanvasRenderingContext2D,
 ): Promise<void> {
   // If a frame doesn't have points, the points will be undefined.
   const hasPoints = (track.points[frameIndex]?.length ?? 0) > 0;
   if (!hasPoints) {
     return;
   }
-  invariant(frame !== null, "frame must be ready");
+  invariant(frame !== null, 'frame must be ready');
   const bitmap = await createImageBitmap(frame);
   const thumbnailImageData = getThumbnailImageData(
     mask,
     ctx as OffscreenCanvasRenderingContext2D,
-    bitmap
+    bitmap,
   );
 
   bitmap.close();
@@ -154,36 +154,36 @@ export async function generateThumbnail(
 }
 
 export async function getDataURLFromImageData(
-  imageData: ImageData | null
+  imageData: ImageData | null,
 ): Promise<string> {
   if (!imageData) {
-    return "";
+    return '';
   }
 
   const canvas = getCanvas(imageData.width, imageData.height);
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D | null;
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D | null;
 
   if (ctx === null) {
-    return "";
+    return '';
   }
 
   ctx.putImageData(imageData, 0, 0);
 
   if (canvas instanceof OffscreenCanvas) {
     const blob = await canvas.convertToBlob();
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const reader = new FileReader();
       reader.addEventListener(
-        "load",
+        'load',
         () => {
           const result = reader.result;
-          if (typeof result === "string") {
+          if (typeof result === 'string') {
             resolve(result);
           } else {
-            resolve("");
+            resolve('');
           }
         },
-        false
+        false,
       );
       reader.readAsDataURL(blob);
     });
@@ -198,7 +198,7 @@ export function hexToRgb(hex: string): {
   a: number;
 } {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(
-    hex
+    hex,
   );
   return result
     ? {
@@ -213,7 +213,7 @@ export function hexToRgb(hex: string): {
 export function getPointInImage(
   event: React.MouseEvent<HTMLElement>,
   canvas: HTMLCanvasElement,
-  normalized: boolean = false
+  normalized: boolean = false,
 ): [x: number, y: number] {
   const rect = canvas.getBoundingClientRect();
 
@@ -222,24 +222,24 @@ export function getPointInImage(
   // First, center the image
   const elementCenter = new DOMPoint(
     canvas.clientWidth / 2,
-    canvas.clientHeight / 2
+    canvas.clientHeight / 2,
   );
   const imageCenter = new DOMPoint(canvas.width / 2, canvas.height / 2);
   matrix.translateSelf(
     elementCenter.x - imageCenter.x,
-    elementCenter.y - imageCenter.y
+    elementCenter.y - imageCenter.y,
   );
 
   // Containing the object take the minimal scale
   const scale = Math.min(
     canvas.clientWidth / canvas.width,
-    canvas.clientHeight / canvas.height
+    canvas.clientHeight / canvas.height,
   );
   matrix.scaleSelf(scale, scale, 1, imageCenter.x, imageCenter.y);
 
   const point = new DOMPoint(
     event.clientX - rect.left,
-    event.clientY - rect.top
+    event.clientY - rect.top,
   );
   const imagePoint = matrix.inverse().transformPoint(point);
 

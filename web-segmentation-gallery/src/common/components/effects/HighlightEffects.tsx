@@ -17,12 +17,12 @@ import EffectVariantBadge from '@/common/components/effects/EffectVariantBadge';
 import ToolbarActionIcon from '@/common/components/toolbar/ToolbarActionIcon';
 import ToolbarSection from '@/common/components/toolbar/ToolbarSection';
 import useVideoEffect from '@/common/components/video/editor/useVideoEffect';
-import {EffectIndex} from '@/common/components/video/effects/Effects';
+import { EffectIndex } from '@/common/components/video/effects/Effects';
 import {
   activeHighlightEffectAtom,
   activeHighlightEffectGroupAtom,
 } from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export default function HighlightEffects() {
   const setEffect = useVideoEffect();

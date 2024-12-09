@@ -19,19 +19,21 @@ type Props = {
   onClick?: () => void;
 };
 
-export default function ObjectThumbnail({thumbnail, color, onClick}: Props) {
+export default function ObjectThumbnail({ thumbnail, color, onClick }: Props) {
   return (
     <div
-      className="relative h-12 w-12 md:w-20 md:h-20 shrink-0 p-2 rounded-lg bg-contain bg-no-repeat bg-center"
+      className="relative h-12 w-12 shrink-0 rounded-lg bg-contain bg-center bg-no-repeat p-2 md:h-20 md:w-20"
       style={{
         backgroundColor: color,
       }}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <div
-        className="w-full h-full bg-contain bg-no-repeat bg-center"
+        className="h-full w-full bg-contain bg-center bg-no-repeat"
         style={{
           backgroundImage: thumbnail == null ? 'none' : `url(${thumbnail})`,
-        }}></div>
+        }}
+      ></div>
     </div>
   );
 }

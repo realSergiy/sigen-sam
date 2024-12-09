@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Effects} from '@/common/components/video/effects/Effects';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {RLEObject} from '@/jscocotools/mask';
-import {CanvasForm} from 'pts';
+import { Effects } from '@/common/components/video/effects/Effects';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { RLEObject } from '@/jscocotools/mask';
+import { CanvasForm } from 'pts';
 
 export type EffectLayers = {
   background: keyof Effects;

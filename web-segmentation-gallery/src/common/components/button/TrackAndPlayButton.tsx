@@ -23,9 +23,9 @@ import {
   sessionAtom,
   streamingStateAtom,
 } from '@/demo/atoms';
-import {ChevronRight} from '@carbon/icons-react';
-import {useAtom, useAtomValue, useSetAtom} from 'jotai';
-import {useCallback, useEffect} from 'react';
+import { ChevronRight } from '@carbon/icons-react';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useCallback, useEffect } from 'react';
 
 export default function TrackAndPlayButton() {
   const video = useVideo();
@@ -33,8 +33,8 @@ export default function TrackAndPlayButton() {
   const streamingState = useAtomValue(streamingStateAtom);
   const areObjectsInitialized = useAtomValue(areTrackletObjectsInitializedAtom);
   const setSession = useSetAtom(sessionAtom);
-  const {enqueueMessage} = useMessagesSnackbar();
-  const {isThrottled, maxThrottles, throttle} = useFunctionThrottle(250, 4);
+  const { enqueueMessage } = useMessagesSnackbar();
+  const { isThrottled, maxThrottles, throttle } = useFunctionThrottle(250, 4);
 
   const isTrackAndPlayDisabled =
     streamingState === 'aborting' || streamingState === 'requesting';
@@ -77,13 +77,13 @@ export default function TrackAndPlayButton() {
           setSession(previousSession =>
             previousSession == null
               ? previousSession
-              : {...previousSession, ranPropagation: true},
+              : { ...previousSession, ranPropagation: true },
           );
         } else {
           video?.abortStreamMasks();
         }
       },
-      {enableThrottling: isStreaming},
+      { enableThrottling: isStreaming },
     );
   }, [
     isTrackAndPlayDisabled,
@@ -116,7 +116,8 @@ export default function TrackAndPlayButton() {
     <PrimaryCTAButton
       disabled={isThrottled || !areObjectsInitialized}
       onClick={handleTrackAndPlay}
-      endIcon={isStreaming ? undefined : <ChevronRight size={20} />}>
+      endIcon={isStreaming ? undefined : <ChevronRight size={20} />}
+    >
       {isStreaming ? 'Cancel Tracking' : 'Track objects'}
     </PrimaryCTAButton>
   );

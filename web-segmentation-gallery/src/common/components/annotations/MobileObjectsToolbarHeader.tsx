@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 import ToolbarProgressChip from '@/common/components/toolbar/ToolbarProgressChip';
-import {isStreamingAtom, streamingStateAtom} from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
+import { isStreamingAtom, streamingStateAtom } from '@/demo/atoms';
+import { useAtomValue } from 'jotai';
 
 export default function MobileObjectsToolbarHeader() {
   const isStreaming = useAtomValue(isStreamingAtom);
   const streamingState = useAtomValue(streamingStateAtom);
 
   return (
-    <div className="w-full flex gap-4 items-center px-5 py-5">
+    <div className="flex w-full items-center gap-4 px-5 py-5">
       <div className="grow text-sm text-white">
         <ToolbarProgressChip />
         {streamingState === 'full'

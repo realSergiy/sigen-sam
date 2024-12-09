@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Tracklet} from '@/common/tracker/Tracker';
-import {DEMO_SHORT_NAME} from '@/demo/DemoConfig';
-import {Bound, CanvasForm, Num, Pt, Shaping} from 'pts';
-import {AbstractEffect, EffectFrameContext} from './Effect';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { DEMO_SHORT_NAME } from '@/demo/DemoConfig';
+import { Bound, CanvasForm, Num, Pt, Shaping } from 'pts';
+import { AbstractEffect, EffectFrameContext } from './Effect';
 
 export default class BackgroundTextEffect extends AbstractEffect {
   constructor() {

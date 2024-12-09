@@ -18,10 +18,10 @@ import ObjectPlaceholder from '@/common/components/annotations/ObjectPlaceholder
 import ObjectThumbnail from '@/common/components/annotations/ObjectThumbnail';
 import ToolbarObjectContainer from '@/common/components/annotations/ToolbarObjectContainer';
 import useVideo from '@/common/components/video/editor/useVideo';
-import {BaseTracklet} from '@/common/tracker/Tracker';
+import { BaseTracklet } from '@/common/tracker/Tracker';
 import emptyFunction from '@/common/utils/emptyFunction';
-import {activeTrackletObjectIdAtom} from '@/demo/atoms';
-import {useSetAtom} from 'jotai';
+import { activeTrackletObjectIdAtom } from '@/demo/atoms';
+import { useSetAtom } from 'jotai';
 
 type Props = {
   label: string;
@@ -81,7 +81,8 @@ export default function ToolbarObject({
           onClick={onThumbnailClick}
         />
       }
-      isMobile={isMobile}>
+      isMobile={isMobile}
+    >
       <ObjectActions objectId={tracklet.id} active={isActive} />
     </ToolbarObjectContainer>
   );

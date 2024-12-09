@@ -1,76 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import useSelectedFrameHelper from '@/common/components/video/filmstrip/useSelectedFrameHelper';
-import {BaseTracklet, DatalessMask} from '@/common/tracker/Tracker';
-import {spacing, w} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-import {useMemo} from 'react';
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: spacing[4],
-    width: '100%',
-  },
-  trackletNameContainer: {
-    width: w[12],
-    textAlign: 'center',
-    fontSize: '10px',
-    color: 'white',
-  },
-  swimlaneContainer: {
-    flexGrow: 1,
-    position: 'relative',
-    display: 'flex',
-    height: 12,
-    marginVertical: '0.25rem' /* 4px */,
-    '@media screen and (max-width: 768px)': {
-      marginVertical: 0,
-    },
-  },
-  swimlane: {
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    width: '100%',
-    height: 1,
-    transform: 'translate3d(0, -50%, 0)',
-    opacity: 0.4,
-  },
-  segment: {
-    position: 'absolute',
-    top: '50%',
-    height: 1,
-    transform: 'translate3d(0, -50%, 0)',
-  },
-  segmentationPoint: {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate3d(0, -50%, 0)',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    width: 12,
-    height: 12,
-    '@media screen and (max-width: 768px)': {
-      width: 8,
-      height: 8,
-    },
-  },
-});
+import { BaseTracklet, DatalessMask } from '@/common/tracker/Tracker';
+import { useMemo } from 'react';
 
 type SwimlineSegment = {
   left: number;
@@ -106,7 +36,7 @@ function getSwimlaneSegments(masks: DatalessMask[]): SwimlineSegment[] {
   return swimlineSegments;
 }
 
-export default function TrackletSwimlane({tracklet, onSelectFrame}: Props) {
+export default function TrackletSwimlane({ tracklet, onSelectFrame }: Props) {
   const selection = useSelectedFrameHelper();
 
   const segments = useMemo(() => {
@@ -128,13 +58,13 @@ export default function TrackletSwimlane({tracklet, onSelectFrame}: Props) {
   }
 
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.trackletNameContainer)}>
+    <div className="flex w-full items-center gap-4">
+      <div className="w-12 text-center text-xs text-white">
         Object {tracklet.id + 1}
       </div>
-      <div {...stylex.props(styles.swimlaneContainer)}>
+      <div className="relative my-0 flex h-3 flex-grow md:my-1">
         <div
-          {...stylex.props(styles.swimlane)}
+          className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 opacity-40"
           style={{
             backgroundColor: tracklet.color,
           }}
@@ -143,7 +73,7 @@ export default function TrackletSwimlane({tracklet, onSelectFrame}: Props) {
           return (
             <div
               key={segment.left}
-              {...stylex.props(styles.segment)}
+              className="absolute top-1/2 h-px -translate-y-1/2"
               style={{
                 backgroundColor: tracklet.color,
                 left: selection.toPosition(segment.left),
@@ -159,7 +89,7 @@ export default function TrackletSwimlane({tracklet, onSelectFrame}: Props) {
               onClick={() => {
                 onSelectFrame?.(tracklet, index);
               }}
-              {...stylex.props(styles.segmentationPoint)}
+              className="absolute top-1/2 h-2 w-2 -translate-y-1/2 cursor-pointer rounded-full md:h-3 md:w-3"
               style={{
                 left: Math.floor(selection.toPosition(index) - 4),
                 backgroundColor: tracklet.color,

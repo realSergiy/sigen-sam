@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 import EffectsCarousel from '@/common/components/effects/EffectsCarousel';
-import {backgroundEffects} from '@/common/components/effects/EffectsUtils';
+import { backgroundEffects } from '@/common/components/effects/EffectsUtils';
 import useVideoEffect from '@/common/components/video/editor/useVideoEffect';
 import {
   EffectIndex,
   effectPresets,
 } from '@/common/components/video/effects/Effects';
-import {ListBoxes, MagicWand, MagicWandFilled} from '@carbon/icons-react';
-import {useCallback, useRef, useState} from 'react';
-import {Button} from 'react-daisyui';
+import { ListBoxes, MagicWand, MagicWandFilled } from '@carbon/icons-react';
+import { useCallback, useRef, useState } from 'react';
+import { Button } from 'react-daisyui';
 
 import EffectsToolbarBottomActions from '@/common/components/effects/EffectsToolbarBottomActions';
 import ToolbarProgressChip from '@/common/components/toolbar/ToolbarProgressChip';
@@ -31,14 +31,14 @@ import {
   activeHighlightEffectAtom,
   activeHighlightEffectGroupAtom,
 } from '@/demo/atoms';
-import {BLUE_PINK_FILL} from '@/theme/gradientStyle';
-import {useAtomValue} from 'jotai';
+import { BLUE_PINK_FILL } from '@/theme/gradientStyle';
+import { useAtomValue } from 'jotai';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function MobileEffectsToolbar({onTabChange}: Props) {
+export default function MobileEffectsToolbar({ onTabChange }: Props) {
   const preset = useRef(0);
   const setEffect = useVideoEffect();
   const [showEffectsCarousels, setShowEffectsCarousels] = useState<boolean>();
@@ -64,7 +64,7 @@ export default function MobileEffectsToolbar({onTabChange}: Props) {
   return (
     <div className="w-full">
       {showEffectsCarousels ? (
-        <div className="flex gap-2 px-2 py-4 items-center p-6">
+        <div className="flex items-center gap-2 p-6 px-2 py-4">
           <Button
             color="ghost"
             className="mt-6 !px-2 !text-[#FB73A5]"
@@ -94,15 +94,17 @@ export default function MobileEffectsToolbar({onTabChange}: Props) {
             <Button
               color="ghost"
               endIcon={<MagicWandFilled size={20} />}
-              className={`font-bold bg-black !rounded-full !bg-gradient-to-br ${BLUE_PINK_FILL} border-none text-white`}
-              onClick={handleTogglePreset}>
+              className={`!rounded-full bg-black !bg-gradient-to-br font-bold ${BLUE_PINK_FILL} border-none text-white`}
+              onClick={handleTogglePreset}
+            >
               Surprise Me
             </Button>
             <Button
               color="ghost"
-              className={`font-bold bg-black !rounded-full border-none text-white`}
+              className={`!rounded-full border-none bg-black font-bold text-white`}
               startIcon={<ListBoxes size={20} />}
-              onClick={() => setShowEffectsCarousels(true)}>
+              onClick={() => setShowEffectsCarousels(true)}
+            >
               More effects
             </Button>
           </div>

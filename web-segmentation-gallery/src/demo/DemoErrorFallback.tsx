@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import LoadingStateScreen from "@/common/loading/LoadingStateScreen";
-import type { FallbackProps } from "react-error-boundary";
+import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
+import type { FallbackProps } from 'react-error-boundary';
 
 export default function DemoErrorFallback(_props: FallbackProps) {
   return (
     <LoadingStateScreen
       title="Well, this is embarrassing..."
       description="This demo is not optimized for your device. Please try again on a different device with a larger screen."
-      linkProps={{ to: "..", label: "Back to homepage" }}
+      linkProps={{ to: '..', label: 'Back to homepage' }}
     />
   );
 }

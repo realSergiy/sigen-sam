@@ -20,9 +20,9 @@ import {
 } from '@/common/components/video/effects/Effect';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Sobel.frag';
-import {Tracklet} from '@/common/tracker/Tracker';
+import { Tracklet } from '@/common/tracker/Tracker';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class SobelEffect extends BaseGLEffect {
   constructor() {

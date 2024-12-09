@@ -19,15 +19,15 @@ import TryAnotherVideoSection from '@/common/components/options/TryAnotherVideoS
 import useMessagesSnackbar from '@/common/components/snackbar/useDemoMessagesSnackbar';
 import ToolbarHeaderWrapper from '@/common/components/toolbar/ToolbarHeaderWrapper';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function MoreOptionsToolbar({onTabChange}: Props) {
-  const {isMobile} = useScreenSize();
-  const {clearMessage} = useMessagesSnackbar();
+export default function MoreOptionsToolbar({ onTabChange }: Props) {
+  const { isMobile } = useScreenSize();
+  const { clearMessage } = useMessagesSnackbar();
   const didClearMessageSnackbar = useRef(false);
 
   useEffect(() => {
@@ -38,15 +38,15 @@ export default function MoreOptionsToolbar({onTabChange}: Props) {
   }, [clearMessage]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <div className="grow">
         <ToolbarHeaderWrapper
           title="Nice work! What's next?"
-          className="pb-0 !border-b-0 !text-white"
+          className="!border-b-0 pb-0 !text-white"
           showProgressChip={false}
         />
         <ShareSection />
-        {!isMobile && <div className="h-[1px] bg-black mt-4 mb-8"></div>}
+        {!isMobile && <div className="mb-8 mt-4 h-[1px] bg-black"></div>}
         <TryAnotherVideoSection onTabChange={onTabChange} />
       </div>
       {!isMobile && (

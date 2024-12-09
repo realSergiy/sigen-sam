@@ -25,68 +25,68 @@ export type SAM2ModelCloseSessionMutation = {
   variables: SAM2ModelCloseSessionMutation$variables;
 };
 
-const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
-  {
-    "alias": null,
-    "args": [
+const node: ConcreteRequest = (function () {
+  var v0 = [
       {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input"
-      }
+        defaultValue: null,
+        kind: 'LocalArgument',
+        name: 'input',
+      },
     ],
-    "concreteType": "CloseSession",
-    "kind": "LinkedField",
-    "name": "closeSession",
-    "plural": false,
-    "selections": [
+    v1 = [
       {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "success",
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  }
-];
-return {
-  "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "SAM2ModelCloseSessionMutation",
-    "selections": (v1/*: any*/),
-    "type": "Mutation",
-    "abstractKey": null
-  },
-  "kind": "Request",
-  "operation": {
-    "argumentDefinitions": (v0/*: any*/),
-    "kind": "Operation",
-    "name": "SAM2ModelCloseSessionMutation",
-    "selections": (v1/*: any*/)
-  },
-  "params": {
-    "cacheID": "aa7177838c16536b397bfee2d15a94ee",
-    "id": null,
-    "metadata": {},
-    "name": "SAM2ModelCloseSessionMutation",
-    "operationKind": "mutation",
-    "text": "mutation SAM2ModelCloseSessionMutation(\n  $input: CloseSessionInput!\n) {\n  closeSession(input: $input) {\n    success\n  }\n}\n"
-  }
-};
+        alias: null,
+        args: [
+          {
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'input',
+          },
+        ],
+        concreteType: 'CloseSession',
+        kind: 'LinkedField',
+        name: 'closeSession',
+        plural: false,
+        selections: [
+          {
+            alias: null,
+            args: null,
+            kind: 'ScalarField',
+            name: 'success',
+            storageKey: null,
+          },
+        ],
+        storageKey: null,
+      },
+    ];
+  return {
+    fragment: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Fragment',
+      metadata: null,
+      name: 'SAM2ModelCloseSessionMutation',
+      selections: v1 /*: any*/,
+      type: 'Mutation',
+      abstractKey: null,
+    },
+    kind: 'Request',
+    operation: {
+      argumentDefinitions: v0 /*: any*/,
+      kind: 'Operation',
+      name: 'SAM2ModelCloseSessionMutation',
+      selections: v1 /*: any*/,
+    },
+    params: {
+      cacheID: 'aa7177838c16536b397bfee2d15a94ee',
+      id: null,
+      metadata: {},
+      name: 'SAM2ModelCloseSessionMutation',
+      operationKind: 'mutation',
+      text: 'mutation SAM2ModelCloseSessionMutation(\n  $input: CloseSessionInput!\n) {\n  closeSession(input: $input) {\n    success\n  }\n}\n',
+    },
+  };
 })();
 
-(node as any).hash = "6e1008de944562dc1922cd3f9cc40f10";
+(node as any).hash = '6e1008de944562dc1922cd3f9cc40f10';
 
 export default node;

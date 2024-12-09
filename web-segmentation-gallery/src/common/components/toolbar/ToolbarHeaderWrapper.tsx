@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import ToolbarProgressChip from './ToolbarProgressChip';
 
 type Props = {
@@ -33,7 +33,8 @@ export default function ToolbarHeaderWrapper({
 }: Props) {
   return (
     <div
-      className={`flex flex-col gap-2 p-8 border-b border-b-black ${className}`}>
+      className={`flex flex-col gap-2 border-b border-b-black p-8 ${className}`}
+    >
       <div className="flex items-center">
         {showProgressChip && <ToolbarProgressChip />}
         <h2 className="text-xl">{title}</h2>

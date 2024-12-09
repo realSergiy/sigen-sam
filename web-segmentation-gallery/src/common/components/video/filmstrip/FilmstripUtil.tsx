@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {CanvasForm, CanvasSpace, Font, Group, Pt, Triangle} from 'pts';
+import { CanvasForm, CanvasSpace, Font, Group, Pt, Triangle } from 'pts';
 import SelectedFrameHelper from './SelectedFrameHelper';
-import {PADDING_BOTTOM, PADDING_TOP} from './VideoFilmstrip';
+import { PADDING_BOTTOM, PADDING_TOP } from './VideoFilmstrip';
 
 export function getPointerPosition(
   event: React.PointerEvent<HTMLCanvasElement>,

@@ -1,3 +1,63 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:unicorn/recommended",
+    "plugin:import/recommended",
+    "plugin:playwright/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/exports": "error",
+    "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/prevent-abbreviations": "off",
+
+    "simple-import-sort/imports": "off",
+    "unicorn/no-null": "off",
+    "import/named": "off",
+    "unicorn/prefer-string-replace-all": "off",
+    "unicorn/prefer-string-slice": "off",
+    "unicorn/numeric-separators-style": "off",
+    "unicorn/throw-new-error": "off",
+    "unicorn/no-abusive-eslint-disable": "off",
+    "unicorn/prefer-number-properties": "off",
+    "unicorn/prefer-spread": "off",
+    "import/no-named-as-default": "off",
+    "unicorn/prefer-code-point": "off",
+    "unicorn/no-for-loop": "off",
+    "unicorn/prefer-switch": "off",
+    "unicorn/prefer-math-min-max": "off",
+    "unicorn/no-object-as-default-parameter": "off",
+    "unicorn/consistent-existence-index-check": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/relative-url-style": "off",
+    "unicorn/require-number-to-fixed-digits-argument": "off",
+    "unicorn/explicit-length-check": "off",
+    "unicorn/no-zero-fractions": "off",
+    "unicorn/switch-case-braces": "off",
+    "unicorn/new-for-builtins": "off",
+    "unicorn/prefer-global-this": "off",
+    "unicorn/no-useless-promise-resolve-reject": "off",
+    "unicorn/prefer-ternary": "off",
+    "unicorn/prefer-add-event-listener": "off",
+    "unicorn/prefer-blob-reading-methods": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/prefer-top-level-await": "off",
+    "unicorn/prefer-event-target": "off",
+    "unicorn/prefer-at": "off",
+    "unicorn/prefer-dom-node-append": "off",
+    "unicorn/prefer-math-trunc": "off",
+    "unicorn/prefer-type-error": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "unicorn/prefer-module": "off"
+      }
+    }
+  ]
 }

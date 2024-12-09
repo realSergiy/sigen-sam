@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {OBJECT_TOOLBAR_INDEX} from '@/common/components/toolbar/ToolbarConfig';
+import { OBJECT_TOOLBAR_INDEX } from '@/common/components/toolbar/ToolbarConfig';
 import Tooltip from '@/common/components/Tooltip';
 import useVideo from '@/common/components/video/editor/useVideo';
-import {isPlayingAtom, streamingStateAtom, toolbarTabIndex} from '@/demo/atoms';
-import {PauseFilled, PlayFilledAlt} from '@carbon/icons-react';
-import {useAtomValue} from 'jotai';
-import {useCallback, useEffect} from 'react';
+import {
+  isPlayingAtom,
+  streamingStateAtom,
+  toolbarTabIndex,
+} from '@/demo/atoms';
+import { PauseFilled, PlayFilledAlt } from '@carbon/icons-react';
+import { useAtomValue } from 'jotai';
+import { useCallback, useEffect } from 'react';
 
 export default function PlaybackButton() {
   const tabIndex = useAtomValue(toolbarTabIndex);
@@ -71,8 +75,9 @@ export default function PlaybackButton() {
     <Tooltip message={`${isPlaying ? 'Pause' : 'Play'} (k)`}>
       <button
         disabled={isDisabled}
-        className={`group !rounded-full !w-10 !h-10 flex items-center justify-center ${getButtonStyles(isDisabled)}`}
-        onClick={handleClick}>
+        className={`group flex !h-10 !w-10 items-center justify-center !rounded-full ${getButtonStyles(isDisabled)}`}
+        onClick={handleClick}
+      >
         {isPlaying ? (
           <PauseFilled size={18} />
         ) : (

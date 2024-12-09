@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {inputVideoAtom} from '@/demo/atoms';
-import {useAtom} from 'jotai';
+import { inputVideoAtom } from '@/demo/atoms';
+import { useAtom } from 'jotai';
 
 export default function useInputVideo() {
   const [inputVideo, setInputVideo] = useAtom(inputVideoAtom);
-  return {inputVideo, setInputVideo};
+  return { inputVideo, setInputVideo };
 }

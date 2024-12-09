@@ -15,9 +15,9 @@
  */
 import GradientBorder from '@/common/components/button/GradientBorder';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {BLUE_PINK_FILL_BR} from '@/theme/gradientStyle';
-import type {CarbonIconType} from '@carbon/icons-react';
-import {Loading} from 'react-daisyui';
+import { BLUE_PINK_FILL_BR } from '@/theme/gradientStyle';
+import type { CarbonIconType } from '@carbon/icons-react';
+import { Loading } from 'react-daisyui';
 
 type Props = {
   variant?: 'default' | 'flat' | 'gradient';
@@ -41,7 +41,7 @@ export default function OptionButton({
   loadingProps,
   onClick,
 }: Props) {
-  const {isMobile} = useScreenSize();
+  const { isMobile } = useScreenSize();
   const isLoading = loadingProps?.loading === true;
 
   function handleClick() {
@@ -54,12 +54,9 @@ export default function OptionButton({
   const ButtonBase = (
     <div
       onClick={handleClick}
-      className={`relative rounded-lg h-full flex items-center justify-center 
-${variant === 'default' ? 'bg-graydark-700' : ''}
-${!isDisabled && 'cursor-pointer'}
-${isDisabled ? 'text-gray-300' : ''}
-${isActive && BLUE_PINK_FILL_BR}`}>
-      <div className="flex gap-2 items-center py-4 md:py-6">
+      className={`relative flex h-full items-center justify-center rounded-lg ${variant === 'default' ? 'bg-graydark-700' : ''} ${!isDisabled && 'cursor-pointer'} ${isDisabled ? 'text-gray-300' : ''} ${isActive && BLUE_PINK_FILL_BR}`}
+    >
+      <div className="flex items-center gap-2 py-4 md:py-6">
         {isLoading ? (
           <Loading size="md" className="mx-auto mt-1" />
         ) : (

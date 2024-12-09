@@ -20,11 +20,11 @@ import {
 } from '@/common/components/video/effects/Effect';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Cutout.frag';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {preAllocateTextures} from '@/common/utils/ShaderUtils';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { preAllocateTextures } from '@/common/utils/ShaderUtils';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class CutoutGLEffect extends BaseGLEffect {
   private _numMasks: number = 0;

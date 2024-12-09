@@ -72,7 +72,7 @@ export async function* streamFile(url: string, init?: RequestInit): FileStream {
       const reader = response.body.getReader();
       try {
         while (true) {
-          const {done, value} = await reader.read();
+          const { done, value } = await reader.read();
           if (done) {
             break;
           }
@@ -82,7 +82,7 @@ export async function* streamFile(url: string, init?: RequestInit): FileStream {
 
           yield {
             data: value,
-            range: {start, end},
+            range: { start, end },
             contentLength: totalLength,
           };
         }

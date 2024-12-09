@@ -1,17 +1,19 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 //ToDo: switch to using turbo: https://nextjs.org/docs/app/api-reference/next-config-js/turbo#webpack-loaders
 
+const __dirname = new URL('.', import.meta.url).pathname;
+
 const nextConfig: NextConfig = {
-  module: {
-    rules: [
-      {
-        test: /\.glsl$|\.frag$|\.vert$/i, //ToDo: try to test for ?raw instead like vite does
-        use: ["raw-loader"],
-      },
-    ],
+  webpack: (config, { isServer }) => {
+    // add raw-loader for glsl, frag, and vert files
+    config.module.rules.push({
+      test: /\.(glsl|frag|vert)$/,
+      use: ['raw-loader'],
+    });
+
+    return config;
   },
-  /* config options here */
 };
 
 export default nextConfig;

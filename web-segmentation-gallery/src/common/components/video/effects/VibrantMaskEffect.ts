@@ -20,15 +20,15 @@ import {
 } from '@/common/components/video/effects/Effect';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/VibrantMask.frag';
-import {Tracklet} from '@/common/tracker/Tracker';
+import { Tracklet } from '@/common/tracker/Tracker';
 import {
   generateLUTDATA,
   load3DLUT,
   preAllocateTextures,
 } from '@/common/utils/ShaderUtils';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class VibrantMaskEffect extends BaseGLEffect {
   private lutSize: number = 4;

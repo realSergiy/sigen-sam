@@ -1,18 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import DefaultVideoGalleryModalTrigger from '@/common/components/gallery/DefaultVideoGalleryModalTrigger';
 import {
   frameIndexAtom,
@@ -20,47 +5,11 @@ import {
   uploadingStateAtom,
   VideoData,
 } from '@/demo/atoms';
-import {spacing} from '@/theme/tokens.stylex';
-import {Close} from '@carbon/icons-react';
-import stylex from '@stylexjs/stylex';
-import {useSetAtom} from 'jotai';
-import {ComponentType, useCallback, useRef} from 'react';
-import {Modal} from 'react-daisyui';
+import { Close } from '@carbon/icons-react';
+import { useSetAtom } from 'jotai';
+import { ComponentType, useCallback, useRef } from 'react';
+import { Modal } from 'react-daisyui';
 import DemoVideoGallery from './DemoVideoGallery';
-
-const styles = stylex.create({
-  container: {
-    position: 'relative',
-    minWidth: '85vw',
-    minHeight: '85vh',
-    overflow: 'hidden',
-    color: '#fff',
-    boxShadow: '0 0 100px 50px #000',
-    borderRadius: 16,
-    border: '2px solid transparent',
-    background:
-      'linear-gradient(#1A1C1F, #1A1C1F) padding-box, linear-gradient(to right bottom, #FB73A5,#595FEF,#94EAE2,#FCCB6B) border-box',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    padding: spacing[3],
-    zIndex: 10,
-    cursor: 'pointer',
-    ':hover': {
-      opacity: 0.7,
-    },
-  },
-  galleryContainer: {
-    position: 'absolute',
-    top: spacing[4],
-    left: 0,
-    right: 0,
-    bottom: 0,
-    overflowY: 'auto',
-  },
-});
 
 export type VideoGalleryTriggerProps = {
   onClick: () => void;
@@ -127,12 +76,18 @@ export default function DemoVideoGalleryModal({
   return (
     <>
       <VideoGalleryModalTrigger onClick={handleOpenVideoGalleryModal} />
-      <Modal ref={modalRef} {...stylex.props(styles.container)}>
-        <div onClick={closeModal} {...stylex.props(styles.closeButton)}>
+      <Modal
+        ref={modalRef}
+        className="relative min-h-[85vh] min-w-[85vw] overflow-hidden rounded-lg border-2 border-transparent bg-gradient-to-r from-pink-500 via-purple-600 to-blue-500 text-white shadow-[0_0_100px_50px_#000]"
+      >
+        <div
+          onClick={closeModal}
+          className="absolute right-0 top-0 z-10 cursor-pointer p-3 hover:opacity-70"
+        >
           <Close size={28} />
         </div>
         <Modal.Body>
-          <div {...stylex.props(styles.galleryContainer)}>
+          <div className="absolute bottom-0 left-0 right-0 top-4 overflow-y-auto">
             <DemoVideoGallery
               showUploadInGallery={showUploadInGallery}
               onSelect={video => handleSelect(video)}

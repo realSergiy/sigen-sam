@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 import ChangeVideoModal from '@/common/components/gallery/ChangeVideoModal';
-import type {VideoGalleryTriggerProps} from '@/common/components/gallery/DemoVideoGalleryModal';
+import type { VideoGalleryTriggerProps } from '@/common/components/gallery/DemoVideoGalleryModal';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {ImageCopy} from '@carbon/icons-react';
+import { ImageCopy } from '@carbon/icons-react';
 import OptionButton from './OptionButton';
 
 type Props = {
   onChangeVideo: () => void;
 };
-export default function GalleryOption({onChangeVideo}: Props) {
+export default function GalleryOption({ onChangeVideo }: Props) {
   return (
     <ChangeVideoModal
       videoGalleryModalTrigger={GalleryTrigger}
@@ -32,8 +32,8 @@ export default function GalleryOption({onChangeVideo}: Props) {
   );
 }
 
-function GalleryTrigger({onClick}: VideoGalleryTriggerProps) {
-  const {isMobile} = useScreenSize();
+function GalleryTrigger({ onClick }: VideoGalleryTriggerProps) {
+  const { isMobile } = useScreenSize();
 
   return (
     <OptionButton
