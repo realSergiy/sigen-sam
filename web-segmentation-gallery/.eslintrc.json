@@ -1,6 +1,8 @@
 {
   "extends": [
     "next/core-web-vitals",
+    "next/typescript",
+    "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
     "plugin:import/recommended",
@@ -61,7 +63,8 @@
       "files": ["*.js"],
       "rules": {
         "unicorn/prefer-module": "off"
-      }
+      },
+      "parser": "@typescript-eslint/parser"
     }
   ]
 }

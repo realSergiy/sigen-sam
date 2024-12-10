@@ -37,111 +37,111 @@ export type SAM2ModelAddNewPointsMutation = {
   variables: SAM2ModelAddNewPointsMutation$variables;
 };
 
-const node: ConcreteRequest = (function () {
-  var v0 = [
+const node: ConcreteRequest = (function(){
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "input"
+  }
+],
+v1 = [
+  {
+    "alias": null,
+    "args": [
       {
-        defaultValue: null,
-        kind: 'LocalArgument',
-        name: 'input',
-      },
+        "kind": "Variable",
+        "name": "input",
+        "variableName": "input"
+      }
     ],
-    v1 = [
+    "concreteType": "RLEMaskListOnFrame",
+    "kind": "LinkedField",
+    "name": "addPoints",
+    "plural": false,
+    "selections": [
       {
-        alias: null,
-        args: [
-          {
-            kind: 'Variable',
-            name: 'input',
-            variableName: 'input',
-          },
-        ],
-        concreteType: 'RLEMaskListOnFrame',
-        kind: 'LinkedField',
-        name: 'addPoints',
-        plural: false,
-        selections: [
-          {
-            alias: null,
-            args: null,
-            kind: 'ScalarField',
-            name: 'frameIndex',
-            storageKey: null,
-          },
-          {
-            alias: null,
-            args: null,
-            concreteType: 'RLEMaskForObject',
-            kind: 'LinkedField',
-            name: 'rleMaskList',
-            plural: true,
-            selections: [
-              {
-                alias: null,
-                args: null,
-                kind: 'ScalarField',
-                name: 'objectId',
-                storageKey: null,
-              },
-              {
-                alias: null,
-                args: null,
-                concreteType: 'RLEMask',
-                kind: 'LinkedField',
-                name: 'rleMask',
-                plural: false,
-                selections: [
-                  {
-                    alias: null,
-                    args: null,
-                    kind: 'ScalarField',
-                    name: 'counts',
-                    storageKey: null,
-                  },
-                  {
-                    alias: null,
-                    args: null,
-                    kind: 'ScalarField',
-                    name: 'size',
-                    storageKey: null,
-                  },
-                ],
-                storageKey: null,
-              },
-            ],
-            storageKey: null,
-          },
-        ],
-        storageKey: null,
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "frameIndex",
+        "storageKey": null
       },
-    ];
-  return {
-    fragment: {
-      argumentDefinitions: v0 /*: any*/,
-      kind: 'Fragment',
-      metadata: null,
-      name: 'SAM2ModelAddNewPointsMutation',
-      selections: v1 /*: any*/,
-      type: 'Mutation',
-      abstractKey: null,
-    },
-    kind: 'Request',
-    operation: {
-      argumentDefinitions: v0 /*: any*/,
-      kind: 'Operation',
-      name: 'SAM2ModelAddNewPointsMutation',
-      selections: v1 /*: any*/,
-    },
-    params: {
-      cacheID: 'dc86527e91907e696683458ed0943d2f',
-      id: null,
-      metadata: {},
-      name: 'SAM2ModelAddNewPointsMutation',
-      operationKind: 'mutation',
-      text: 'mutation SAM2ModelAddNewPointsMutation(\n  $input: AddPointsInput!\n) {\n  addPoints(input: $input) {\n    frameIndex\n    rleMaskList {\n      objectId\n      rleMask {\n        counts\n        size\n      }\n    }\n  }\n}\n',
-    },
-  };
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "RLEMaskForObject",
+        "kind": "LinkedField",
+        "name": "rleMaskList",
+        "plural": true,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "objectId",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "RLEMask",
+            "kind": "LinkedField",
+            "name": "rleMask",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "counts",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "size",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  }
+];
+return {
+  "fragment": {
+    "argumentDefinitions": (v0/*: any*/),
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "SAM2ModelAddNewPointsMutation",
+    "selections": (v1/*: any*/),
+    "type": "Mutation",
+    "abstractKey": null
+  },
+  "kind": "Request",
+  "operation": {
+    "argumentDefinitions": (v0/*: any*/),
+    "kind": "Operation",
+    "name": "SAM2ModelAddNewPointsMutation",
+    "selections": (v1/*: any*/)
+  },
+  "params": {
+    "cacheID": "dc86527e91907e696683458ed0943d2f",
+    "id": null,
+    "metadata": {},
+    "name": "SAM2ModelAddNewPointsMutation",
+    "operationKind": "mutation",
+    "text": "mutation SAM2ModelAddNewPointsMutation(\n  $input: AddPointsInput!\n) {\n  addPoints(input: $input) {\n    frameIndex\n    rleMaskList {\n      objectId\n      rleMask {\n        counts\n        size\n      }\n    }\n  }\n}\n"
+  }
+};
 })();
 
-(node as any).hash = '3c96f05877dd91668c1f9e8a3f1203a5';
+(node as any).hash = "3c96f05877dd91668c1f9e8a3f1203a5";
 
 export default node;

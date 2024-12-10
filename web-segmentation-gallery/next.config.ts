@@ -1,7 +1,14 @@
-// @ts-check
+import { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
+  compiler: {
+    relay: {
+      // This should match relay.config.js
+      src: './src/',      
+      language: 'typescript',
+      eagerEsModules: true,
+    },
+  },
   webpack: (config, { isServer }) => {
     // add raw-loader for glsl, frag, and vert files
     config.module.rules.push({
