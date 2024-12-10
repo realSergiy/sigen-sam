@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {useSetAtom} from 'jotai';
-import {useCallback} from 'react';
+import { useSetAtom } from 'jotai';
+import { useCallback } from 'react';
 import {
   MessageType,
   messageAtom,
@@ -56,5 +56,5 @@ export default function useMessagesSnackbar(): State {
     setMessage(null);
   }
 
-  return {enqueueMessage, clearMessage};
+  return { enqueueMessage, clearMessage };
 }

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {cloneFrame} from './WebCodecUtils';
-import {FileStream} from '@/common/utils/FileUtils';
+import { cloneFrame } from './WebCodecUtils';
+import { FileStream } from '@/common/utils/FileUtils';
 import {
   createFile,
   DataStream,
@@ -23,7 +23,7 @@ import {
   MP4Sample,
   MP4VideoTrack,
 } from 'mp4box';
-import {isAndroid, isChrome, isEdge, isWindows} from 'react-device-detect';
+import { isAndroid, isChrome, isEdge, isWindows } from 'react-device-detect';
 
 export type ImageFrame = {
   bitmap: VideoFrame;

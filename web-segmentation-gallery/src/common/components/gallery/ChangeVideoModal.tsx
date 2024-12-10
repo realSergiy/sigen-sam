@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type {VideoGalleryTriggerProps} from '@/common/components/gallery/DemoVideoGalleryModal';
+import type { VideoGalleryTriggerProps } from '@/common/components/gallery/DemoVideoGalleryModal';
 import DemoVideoGalleryModal from '@/common/components/gallery/DemoVideoGalleryModal';
 import useVideo from '@/common/components/video/editor/useVideo';
 import Logger from '@/common/logger/Logger';
-import {isStreamingAtom, uploadingStateAtom, VideoData} from '@/demo/atoms';
-import {useAtomValue, useSetAtom} from 'jotai';
-import {ComponentType, useCallback} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {
+  navigationVideoAtom,
+  isStreamingAtom,
+  uploadingStateAtom,
+  VideoData,
+} from '@/demo/atoms';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { ComponentType, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   videoGalleryModalTrigger?: ComponentType<VideoGalleryTriggerProps>;
@@ -35,8 +40,9 @@ export default function ChangeVideoModal({
 }: Props) {
   const isStreaming = useAtomValue(isStreamingAtom);
   const setUploadingState = useSetAtom(uploadingStateAtom);
+  const setNavigationVideo = useSetAtom(navigationVideoAtom);
   const video = useVideo();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handlePause = useCallback(() => {
     video?.pause();
@@ -51,19 +57,11 @@ export default function ChangeVideoModal({
   }
 
   function handleSwitchVideos(video: VideoData) {
-    // Retain any search parameter
-    navigate(
-      {
-        pathname: location.pathname,
-        search: location.search,
-      },
-      {
-        state: {
-          video,
-        },
-      },
-    );
-    onChangeVideo?.();
+    const newUrl = `${location.pathname}${location.search}`;
+    setNavigationVideo(video);
+    router.push(newUrl);
+
+    onChangeVideo?.(); // pass the video data here?
   }
 
   function handleUploadVideoError(error: Error) {

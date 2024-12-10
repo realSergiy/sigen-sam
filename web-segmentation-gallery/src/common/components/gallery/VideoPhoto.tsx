@@ -1,20 +1,4 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import Logger from '@/common/logger/Logger';
-import stylex from '@stylexjs/stylex';
 import {
   CSSProperties,
   MouseEventHandler,
@@ -23,19 +7,6 @@ import {
   useRef,
 } from 'react';
 
-const styles = stylex.create({
-  background: {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    cursor: 'pointer',
-  },
-  video: {
-    width: '100%',
-    height: '100%',
-  },
-});
-
 type Props = {
   onClick: MouseEventHandler<HTMLVideoElement> | undefined;
   src: string;
@@ -43,7 +14,7 @@ type Props = {
   style: CSSProperties;
 };
 
-export default function VideoPhoto({src, poster, style, onClick}: Props) {
+export default function VideoPhoto({ src, poster, style, onClick }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const playPromiseRef = useRef<Promise<void> | null>(null);
 
@@ -91,10 +62,11 @@ export default function VideoPhoto({src, poster, style, onClick}: Props) {
         ...style,
         backgroundImage: `url(${poster})`,
       }}
-      {...stylex.props(styles.background)}>
+      className="cursor-pointer bg-cover bg-center bg-no-repeat"
+    >
       <video
         ref={videoRef}
-        {...stylex.props(styles.video)}
+        className="h-full w-full"
         preload="none"
         playsInline
         loop
@@ -103,7 +75,8 @@ export default function VideoPhoto({src, poster, style, onClick}: Props) {
         poster={poster}
         onMouseEnter={play}
         onMouseLeave={pause}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <source src={src} type="video/mp4" />
         Sorry, your browser does not support embedded videos.
       </video>

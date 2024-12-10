@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {trackletObjectsAtom} from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
+import { trackletObjectsAtom } from '@/demo/atoms';
+import { useAtomValue } from 'jotai';
 
 export default function useTracklets() {
   return useAtomValue(trackletObjectsAtom);

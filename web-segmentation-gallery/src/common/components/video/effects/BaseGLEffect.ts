@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 import Logger from '@/common/logger/Logger';
-import {Tracklet} from '@/common/tracker/Tracker';
+import { Tracklet } from '@/common/tracker/Tracker';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
-import {AbstractEffect, EffectFrameContext, EffectInit} from './Effect';
+import { CanvasForm } from 'pts';
+import { AbstractEffect, EffectFrameContext, EffectInit } from './Effect';
 
 export default abstract class BaseGLEffect extends AbstractEffect {
   protected _canvas: OffscreenCanvas | null = null;
@@ -34,7 +34,7 @@ export default abstract class BaseGLEffect extends AbstractEffect {
   protected _fragmentShader: WebGLShader | null = null;
 
   async setup(init: EffectInit): Promise<void> {
-    const {canvas, gl} = init;
+    const { canvas, gl } = init;
 
     if (canvas != null && gl != null) {
       this._canvas = canvas;

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {getFileName} from '@/common/components/options/ShareUtils';
+import { getFileName } from '@/common/components/options/ShareUtils';
 import {
   EncodingCompletedEvent,
   EncodingStateUpdateEvent,
 } from '@/common/components/video/VideoWorkerBridge';
 import useVideo from '@/common/components/video/editor/useVideo';
-import {MP4ArrayBuffer} from 'mp4box';
-import {useState} from 'react';
+import { MP4ArrayBuffer } from 'mp4box';
+import { useState } from 'react';
 
 type DownloadingState = 'default' | 'started' | 'encoding' | 'completed';
 
@@ -84,5 +84,5 @@ export default function useDownloadVideo(): State {
     window.URL.revokeObjectURL(url);
   }
 
-  return {download, progress, state: downloadingState};
+  return { download, progress, state: downloadingState };
 }

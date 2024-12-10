@@ -17,30 +17,30 @@ import {
   DecodedVideo,
   ImageFrame,
   decodeStream,
-} from "@/common/codecs/VideoDecoder";
-import { encode as encodeVideo } from "@/common/codecs/VideoEncoder";
+} from '@/common/codecs/VideoDecoder';
+import { encode as encodeVideo } from '@/common/codecs/VideoEncoder';
 import {
   Effect,
   EffectActionPoint,
   EffectFrameContext,
   EffectOptions,
-} from "@/common/components/video/effects/Effect";
+} from '@/common/components/video/effects/Effect';
 import AllEffects, {
   EffectIndex,
   Effects,
-} from "@/common/components/video/effects/Effects";
-import Logger from "@/common/logger/Logger";
-import { Mask, SegmentationPoint, Tracklet } from "@/common/tracker/Tracker";
-import { streamFile } from "@/common/utils/FileUtils";
-import { Stats } from "@/debug/stats/Stats";
-import { VIDEO_WATERMARK_TEXT } from "@/demo/DemoConfig";
-import CreateFilmstripError from "@/graphql/errors/CreateFilmstripError";
-import DrawFrameError from "@/graphql/errors/DrawFrameError";
-import WebGLContextError from "@/graphql/errors/WebGLContextError";
-import { RLEObject } from "@/jscocotools/mask";
-import invariant from "invariant";
-import { CanvasForm } from "pts";
-import { serializeError } from "serialize-error";
+} from '@/common/components/video/effects/Effects';
+import Logger from '@/common/logger/Logger';
+import { Mask, SegmentationPoint, Tracklet } from '@/common/tracker/Tracker';
+import { streamFile } from '@/common/utils/FileUtils';
+import { Stats } from '@/debug/stats/Stats';
+import { VIDEO_WATERMARK_TEXT } from '@/demo/DemoConfig';
+import CreateFilmstripError from '@/graphql/errors/CreateFilmstripError';
+import DrawFrameError from '@/graphql/errors/DrawFrameError';
+import WebGLContextError from '@/graphql/errors/WebGLContextError';
+import { RLEObject } from '@/jscocotools/mask';
+import invariant from 'invariant';
+import { CanvasForm } from 'pts';
+import { serializeError } from 'serialize-error';
 import {
   DecodeResponse,
   EffectUpdateResponse,
@@ -52,7 +52,7 @@ import {
   PlayRequest,
   RenderingErrorResponse,
   VideoWorkerResponse,
-} from "./VideoWorkerTypes";
+} from './VideoWorkerTypes';
 
 function getEvenlySpacedItems(decodedVideo: DecodedVideo, x: number) {
   const p = Math.floor(decodedVideo.numFrames / Math.max(1, x - 1));
@@ -143,17 +143,17 @@ export default class VideoWorkerContext {
 
     if (this._canvasHighlights == null && this._glObjects == null) {
       this._canvasHighlights = new OffscreenCanvas(width, height);
-      this._glObjects = this._canvasHighlights.getContext("webgl2");
+      this._glObjects = this._canvasHighlights.getContext('webgl2');
 
       this._canvasHighlights.addEventListener(
-        "webglcontextlost",
-        (event) => {
+        'webglcontextlost',
+        event => {
           event.preventDefault();
           this._sendRenderingError(
-            new WebGLContextError("WebGL context lost.")
+            new WebGLContextError('WebGL context lost.'),
           );
         },
-        false
+        false,
       );
     } else if (
       this._canvasHighlights != null &&
@@ -170,17 +170,17 @@ export default class VideoWorkerContext {
 
     if (this._canvasBackground == null && this._glBackground == null) {
       this._canvasBackground = new OffscreenCanvas(width, height);
-      this._glBackground = this._canvasBackground.getContext("webgl2");
+      this._glBackground = this._canvasBackground.getContext('webgl2');
 
       this._canvasBackground.addEventListener(
-        "webglcontextlost",
-        (event) => {
+        'webglcontextlost',
+        event => {
           event.preventDefault();
           this._sendRenderingError(
-            new WebGLContextError("WebGL context lost.")
+            new WebGLContextError('WebGL context lost.'),
           );
         },
-        false
+        false,
       );
     } else if (
       this._canvasBackground != null &&
@@ -198,9 +198,9 @@ export default class VideoWorkerContext {
 
   public setCanvas(canvas: OffscreenCanvas) {
     this._canvas = canvas;
-    this._ctx = canvas.getContext("2d");
+    this._ctx = canvas.getContext('2d');
     if (this._ctx == null) {
-      throw new Error("could not initialize drawing context");
+      throw new Error('could not initialize drawing context');
     }
     this._form = new CanvasForm(this._ctx);
   }
@@ -230,7 +230,7 @@ export default class VideoWorkerContext {
 
     // Cannot playback without frames
     if (this._decodedVideo === null) {
-      throw new Error("no decoded video");
+      throw new Error('no decoded video');
     }
 
     const { numFrames, fps } = this._decodedVideo;
@@ -279,14 +279,14 @@ export default class VideoWorkerContext {
   public async createFilmstrip(width: number, height: number): Promise<void> {
     if (width < 1 || height < 1) {
       Logger.warn(
-        `Cannot create filmstrip because width ${width} or height ${height} is too small.`
+        `Cannot create filmstrip because width ${width} or height ${height} is too small.`,
       );
       return;
     }
 
     try {
       const canvas = new OffscreenCanvas(width, height);
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext('2d');
 
       if (this._decodedVideo !== null) {
         const scale = canvas.height / this._decodedVideo.height;
@@ -294,7 +294,7 @@ export default class VideoWorkerContext {
 
         const spacedFrames = getEvenlySpacedItems(
           this._decodedVideo,
-          Math.ceil(canvas.width / resizeWidth)
+          Math.ceil(canvas.width / resizeWidth),
         );
 
         spacedFrames.forEach((frame, idx) => {
@@ -304,7 +304,7 @@ export default class VideoWorkerContext {
               resizeWidth * idx,
               0,
               resizeWidth,
-              canvas.height
+              canvas.height,
             );
           }
         });
@@ -313,15 +313,15 @@ export default class VideoWorkerContext {
       const filmstrip = await createImageBitmap(canvas);
 
       this.sendResponse<FilmstripResponse>(
-        "filmstrip",
+        'filmstrip',
         {
           filmstrip,
         },
-        [filmstrip]
+        [filmstrip],
       );
     } catch {
       this._sendRenderingError(
-        new CreateFilmstripError("Failed to create filmstrip")
+        new CreateFilmstripError('Failed to create filmstrip'),
       );
     }
   }
@@ -329,7 +329,7 @@ export default class VideoWorkerContext {
   public async setEffect(
     name: keyof Effects,
     index: EffectIndex,
-    options?: EffectOptions
+    options?: EffectOptions,
   ): Promise<void> {
     const effect: Effect = AllEffects[name];
 
@@ -343,10 +343,10 @@ export default class VideoWorkerContext {
         index === EffectIndex.BACKGROUND
           ? this._canvasBackground
           : this._canvasHighlights;
-      invariant(offCanvas != null, "need OffscreenCanvas to render effects");
+      invariant(offCanvas != null, 'need OffscreenCanvas to render effects');
       const webglContext =
         index === EffectIndex.BACKGROUND ? this._glBackground : this._glObjects;
-      invariant(webglContext != null, "need WebGL context to render effects");
+      invariant(webglContext != null, 'need WebGL context to render effects');
 
       // Initialize the effect. This can be used by effects to prepare
       // resources needed for rendering. If the video wasn't decoded yet, the
@@ -370,7 +370,7 @@ export default class VideoWorkerContext {
     }
 
     // Notify the frontend about the effect state including its variant.
-    this.sendResponse<EffectUpdateResponse>("effectUpdate", {
+    this.sendResponse<EffectUpdateResponse>('effectUpdate', {
       name,
       index,
       variant: effect.variant,
@@ -385,14 +385,14 @@ export default class VideoWorkerContext {
     const decodedVideo = this._decodedVideo;
     invariant(
       decodedVideo !== null,
-      "cannot encode video because there is no decoded video available"
+      'cannot encode video because there is no decoded video available',
     );
 
     const canvas = new OffscreenCanvas(this.width, this.height);
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     invariant(
       ctx !== null,
-      "cannot encode video because failed to construct offscreen canvas context"
+      'cannot encode video because failed to construct offscreen canvas context',
     );
 
     const form = new CanvasForm(ctx);
@@ -402,25 +402,25 @@ export default class VideoWorkerContext {
       this.height,
       decodedVideo.frames.length,
       this._framesGenerator(decodedVideo, canvas, form),
-      (progress) => {
-        this.sendResponse<EncodingStateUpdateResponse>("encodingStateUpdate", {
+      progress => {
+        this.sendResponse<EncodingStateUpdateResponse>('encodingStateUpdate', {
           progress,
         });
-      }
+      },
     );
     this.sendResponse<EncodingCompletedResponse>(
-      "encodingCompleted",
+      'encodingCompleted',
       {
         file,
       },
-      [file]
+      [file],
     );
   }
 
   private async *_framesGenerator(
     decodedVideo: DecodedVideo,
     canvas: OffscreenCanvas,
-    form: CanvasForm
+    form: CanvasForm,
   ): AsyncGenerator<ImageFrame, undefined> {
     const frames = decodedVideo.frames;
 
@@ -443,20 +443,20 @@ export default class VideoWorkerContext {
   }
 
   public enableStats() {
-    this._stats.fps = new Stats("fps");
-    this._stats.videoFps = new Stats("fps", "V");
-    this._stats.total = new Stats("ms", "T");
-    this._stats.effect0 = new Stats("ms", "B");
-    this._stats.effect1 = new Stats("ms", "H");
-    this._stats.frameBmp = new Stats("ms", "F");
-    this._stats.maskBmp = new Stats("ms", "M");
-    this._stats.memory = new Stats("memory");
+    this._stats.fps = new Stats('fps');
+    this._stats.videoFps = new Stats('fps', 'V');
+    this._stats.total = new Stats('ms', 'T');
+    this._stats.effect0 = new Stats('ms', 'B');
+    this._stats.effect1 = new Stats('ms', 'H');
+    this._stats.frameBmp = new Stats('ms', 'F');
+    this._stats.maskBmp = new Stats('ms', 'M');
+    this._stats.memory = new Stats('memory');
   }
 
   public allowEffectAnimation(
     allow: boolean = true,
     objectId?: number,
-    points?: SegmentationPoint[]
+    points?: SegmentationPoint[],
   ) {
     if (objectId != null && points != null && points.length) {
       const last_point_position = points[points.length - 1];
@@ -478,7 +478,7 @@ export default class VideoWorkerContext {
     this._ctx?.reset();
 
     // Close frames of previously decoded video.
-    this._decodedVideo?.frames.forEach((f) => f.bitmap.close());
+    this._decodedVideo?.frames.forEach(f => f.bitmap.close());
     this._decodedVideo = null;
   }
 
@@ -487,7 +487,7 @@ export default class VideoWorkerContext {
   public updateTracklets(
     frameIndex: number,
     tracklets: Tracklet[],
-    shouldGoToFrame: boolean = true
+    shouldGoToFrame: boolean = true,
   ): void {
     this._tracklets = tracklets;
     if (shouldGoToFrame) {
@@ -496,7 +496,7 @@ export default class VideoWorkerContext {
   }
 
   public clearTrackletMasks(tracklet: Tracklet): void {
-    this._tracklets = this._tracklets.filter((t) => t.id != tracklet.id);
+    this._tracklets = this._tracklets.filter(t => t.id != tracklet.id);
   }
 
   public clearMasks(): void {
@@ -506,9 +506,9 @@ export default class VideoWorkerContext {
   // PRIVATE FUNCTIONS
 
   private sendResponse<T extends VideoWorkerResponse>(
-    action: T["action"],
-    message?: Omit<T, "action">,
-    transfer?: Transferable[]
+    action: T['action'],
+    message?: Omit<T, 'action'>,
+    transfer?: Transferable[],
   ): void {
     self.postMessage(
       {
@@ -517,23 +517,23 @@ export default class VideoWorkerContext {
       },
       {
         transfer,
-      }
+      },
     );
   }
 
   private async _decodeVideo(src: string): Promise<void> {
     const canvas = this._canvas;
-    invariant(canvas != null, "need canvas to render decoded video");
+    invariant(canvas != null, 'need canvas to render decoded video');
 
-    this.sendResponse("loadstart");
+    this.sendResponse('loadstart');
 
     const fileStream = streamFile(src, {
-      credentials: "same-origin",
-      cache: "no-store",
+      credentials: 'same-origin',
+      cache: 'no-store',
     });
 
     let renderedFirstFrame = false;
-    this._decodedVideo = await decodeStream(fileStream, async (progress) => {
+    this._decodedVideo = await decodeStream(fileStream, async progress => {
       const { fps, height, width, numFrames, frames } = progress;
       this._decodedVideo = progress;
       if (!renderedFirstFrame) {
@@ -549,12 +549,12 @@ export default class VideoWorkerContext {
             i === EffectIndex.BACKGROUND
               ? this._canvasBackground
               : this._canvasHighlights;
-          invariant(offCanvas != null, "need canvas to render effects");
+          invariant(offCanvas != null, 'need canvas to render effects');
           const webglContext =
             i === EffectIndex.BACKGROUND ? this._glBackground : this._glObjects;
           invariant(
             webglContext != null,
-            "need WebGL context to render effects"
+            'need WebGL context to render effects',
           );
           await effect.setup({
             width,
@@ -576,7 +576,7 @@ export default class VideoWorkerContext {
         this._stats.frameBmp?.updateMaxValue(1000 / fps);
         this._stats.maskBmp?.updateMaxValue(1000 / fps);
       }
-      this.sendResponse<DecodeResponse>("decode", {
+      this.sendResponse<DecodeResponse>('decode', {
         totalFrames: numFrames,
         numFrames: frames.length,
         fps: fps,
@@ -592,7 +592,7 @@ export default class VideoWorkerContext {
       this._drawFrame();
     }
 
-    this.sendResponse<DecodeResponse>("decode", {
+    this.sendResponse<DecodeResponse>('decode', {
       totalFrames: this._decodedVideo.numFrames,
       numFrames: this._decodedVideo.frames.length,
       fps: this._decodedVideo.fps,
@@ -613,7 +613,7 @@ export default class VideoWorkerContext {
     frameIndex: number,
     enableWatermark: boolean = false,
     step: number = 0,
-    maxSteps: number = 40
+    maxSteps: number = 40,
   ): Promise<void> {
     if (this._decodedVideo === null) {
       return;
@@ -641,7 +641,7 @@ export default class VideoWorkerContext {
       const masks: Mask[] = [];
       const colors: string[] = [];
       const tracklets: Tracklet[] = [];
-      this._tracklets.forEach((tracklet) => {
+      this._tracklets.forEach(tracklet => {
         const mask = tracklet.masks[frameIndex];
         if (mask != null) {
           masks.push(mask);
@@ -663,7 +663,7 @@ export default class VideoWorkerContext {
 
       this._stats.maskBmp?.end();
 
-      form.ctx.fillStyle = "rgba(0, 0, 0, 0)";
+      form.ctx.fillStyle = 'rgba(0, 0, 0, 0)';
       form.ctx.fillRect(0, 0, this.width, this.height);
 
       const effectParams: EffectFrameContext = {
@@ -692,7 +692,7 @@ export default class VideoWorkerContext {
         // Use RAF to draw frame, and update the display,
         // this avoids to wait until the javascript call stack is cleared.
         requestAnimationFrame(() =>
-          this._drawFrameImpl(form, frameIndex, false, step + 1, maxSteps)
+          this._drawFrameImpl(form, frameIndex, false, step + 1, maxSteps),
         );
       } else {
         this._processEffects(form, effectParams, tracklets);
@@ -715,7 +715,7 @@ export default class VideoWorkerContext {
 
       this._isDrawing = false;
     } catch {
-      this._sendRenderingError(new DrawFrameError("Failed to draw frame"));
+      this._sendRenderingError(new DrawFrameError('Failed to draw frame'));
     }
   }
 
@@ -726,7 +726,7 @@ export default class VideoWorkerContext {
     // since the font is not monospaced, we approximate it'll fit 1.5 more characters than monospaced
     const approximateFontSize = Math.min(
       Math.floor(frameWidth / (VIDEO_WATERMARK_TEXT.length / 1.5)),
-      12
+      12,
     );
 
     form.ctx.font = `${approximateFontSize}px "Inter", sans-serif`;
@@ -740,20 +740,20 @@ export default class VideoWorkerContext {
     const textBoxX = frameWidth - textBoxWidth;
     const textBoxY = frameHeight - textBoxHeight;
 
-    form.ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+    form.ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
     form.ctx.beginPath();
     form.ctx.roundRect(
       Math.round(textBoxX),
       Math.round(textBoxY),
       Math.round(textBoxWidth),
       Math.round(textBoxHeight),
-      [WATERMARK_BOX_HORIZONTAL_PADDING, 0, 0, 0]
+      [WATERMARK_BOX_HORIZONTAL_PADDING, 0, 0, 0],
     );
     form.ctx.fill();
 
     // Always reset the text style because some effects may change text styling in the same ctx
-    form.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-    form.ctx.textAlign = "left";
+    form.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    form.ctx.textAlign = 'left';
 
     form.ctx.fillText(
       VIDEO_WATERMARK_TEXT,
@@ -761,14 +761,14 @@ export default class VideoWorkerContext {
       Math.round(
         textBoxY +
           WATERMARK_BOX_VERTICAL_PADDING +
-          measureGeneratedBy.actualBoundingBoxAscent
-      )
+          measureGeneratedBy.actualBoundingBoxAscent,
+      ),
     );
   }
 
   private updateFrameIndex(index: number): void {
     this._frameIndex = index;
-    this.sendResponse<FrameUpdateResponse>("frameUpdate", {
+    this.sendResponse<FrameUpdateResponse>('frameUpdate', {
       index,
     });
   }
@@ -776,16 +776,16 @@ export default class VideoWorkerContext {
   private _loadWatermarkFonts() {
     const requiredFonts = [
       {
-        url: "/fonts/Inter-VariableFont.ttf",
-        format: "truetype-variations",
+        url: '/fonts/Inter-VariableFont.ttf',
+        format: 'truetype-variations',
       },
     ];
-    requiredFonts.forEach((requiredFont) => {
+    requiredFonts.forEach(requiredFont => {
       const fontFace = new FontFace(
-        "Inter",
-        `url(${requiredFont.url}) format('${requiredFont.format}')`
+        'Inter',
+        `url(${requiredFont.url}) format('${requiredFont.format}')`,
       );
-      fontFace.load().then((font) => {
+      fontFace.load().then(font => {
         self.fonts.add(font);
       });
     });
@@ -793,9 +793,9 @@ export default class VideoWorkerContext {
 
   private updatePlayback(playing: boolean): void {
     if (playing) {
-      this.sendResponse<PlayRequest>("play");
+      this.sendResponse<PlayRequest>('play');
     } else {
-      this.sendResponse<PauseRequest>("pause");
+      this.sendResponse<PauseRequest>('pause');
     }
     this._isPlaying = playing;
   }
@@ -812,7 +812,7 @@ export default class VideoWorkerContext {
   }
 
   private _sendRenderingError(error: Error): void {
-    this.sendResponse<RenderingErrorResponse>("renderingError", {
+    this.sendResponse<RenderingErrorResponse>('renderingError', {
       error: serializeError(error),
     });
   }
@@ -820,7 +820,7 @@ export default class VideoWorkerContext {
   private _processEffects(
     form: CanvasForm,
     effectParams: EffectFrameContext,
-    tracklets: Tracklet[]
+    tracklets: Tracklet[],
   ) {
     for (let i = 0; i < this._effects.length; i++) {
       const effect = this._effects[i];

@@ -1,21 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import angeryIcon from '@/assets/icons/angery.png';
-import heartIcon from '@/assets/icons/heart.png';
-import whistleIcon from '@/assets/icons/whistle.png';
 import BaseGLEffect from '@/common/components/video/effects/BaseGLEffect';
 import {
   EffectFrameContext,
@@ -23,11 +5,18 @@ import {
 } from '@/common/components/video/effects/Effect';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Replace.frag';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {normalizeBounds, preAllocateTextures} from '@/common/utils/ShaderUtils';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { Tracklet } from '@/common/tracker/Tracker';
+import {
+  normalizeBounds,
+  preAllocateTextures,
+} from '@/common/utils/ShaderUtils';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
+
+const angeryIconSrc = '/icons/angery.png';
+const heartIconSrc = '/icons/heart.png';
+const whistleIconSrc = '/icons/whistle.png';
 
 export default class ReplaceGLEffect extends BaseGLEffect {
   private _numMasks: number = 0;
@@ -69,16 +58,16 @@ export default class ReplaceGLEffect extends BaseGLEffect {
     this._maskTextures = preAllocateTextures(gl, 3);
 
     this._bitmap = []; // clear any previous pool of texture
-    
-    let response = await fetch(angeryIcon.src);
+
+    let response = await fetch(angeryIconSrc);
     let blob = await response.blob();
     const angery = await createImageBitmap(blob);
-    
-    response = await fetch(heartIcon.src);
+
+    response = await fetch(heartIconSrc);
     blob = await response.blob();
     const heart = await createImageBitmap(blob);
-    
-    response = await fetch(whistleIcon.src);
+
+    response = await fetch(whistleIconSrc);
     blob = await response.blob();
     const whistle = await createImageBitmap(blob);
 

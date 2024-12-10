@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {OBJECT_TOOLBAR_INDEX} from '@/common/components/toolbar/ToolbarConfig';
+import { OBJECT_TOOLBAR_INDEX } from '@/common/components/toolbar/ToolbarConfig';
 import useToolbarTabs from '@/common/components/toolbar/useToolbarTabs';
-import {streamingStateAtom} from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
-import {useMemo} from 'react';
-import {Loading} from 'react-daisyui';
+import { streamingStateAtom } from '@/demo/atoms';
+import { useAtomValue } from 'jotai';
+import { useMemo } from 'react';
+import { Loading } from 'react-daisyui';
 
 const TOTAL_DEMO_STEPS = 3;
 
@@ -38,7 +38,7 @@ export default function ToolbarProgressChip() {
   }
 
   return (
-    <span className="inline-flex items-center justify-center rounded-full text-xs md:text-sm font-medium bg-white text-black w-10 md:w-12 h-5 md:h-6 mr-2 shrink-0 ">
+    <span className="mr-2 inline-flex h-5 w-10 shrink-0 items-center justify-center rounded-full bg-white text-xs font-medium text-black md:h-6 md:w-12 md:text-sm">
       {showLoader ? (
         <Loading className="w-2 md:w-4" />
       ) : (

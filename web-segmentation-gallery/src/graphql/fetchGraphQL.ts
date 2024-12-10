@@ -34,7 +34,7 @@ export default async function fetchGraphQL(
 ): Promise<GraphQLResponse> {
   const url = `${endpoint}/graphql`;
 
-  const headers: {[name: string]: string} = {};
+  const headers: { [name: string]: string } = {};
   const requestInit: RequestInit = {
     method: 'POST',
     headers,
@@ -74,7 +74,7 @@ export default async function fetchGraphQL(
     requestInit.body = formData;
   } else {
     requestInit.headers = Object.assign(
-      {'Content-Type': 'application/json'},
+      { 'Content-Type': 'application/json' },
       requestInit.headers,
     );
 

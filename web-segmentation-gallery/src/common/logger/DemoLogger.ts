@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {RenderingErrorType} from '@/common/error/ErrorUtils';
+import { RenderingErrorType } from '@/common/error/ErrorUtils';
 import Logger from './Logger';
 
 type UploadSourceType = 'gallery' | 'option';

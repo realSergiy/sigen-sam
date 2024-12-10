@@ -21,14 +21,14 @@ import {
   EFFECT_TOOLBAR_INDEX,
   OBJECT_TOOLBAR_INDEX,
 } from '@/common/components/toolbar/ToolbarConfig';
-import {streamingStateAtom} from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
+import { streamingStateAtom } from '@/demo/atoms';
+import { useAtomValue } from 'jotai';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function ObjectsToolbarBottomActions({onTabChange}: Props) {
+export default function ObjectsToolbarBottomActions({ onTabChange }: Props) {
   const streamingState = useAtomValue(streamingStateAtom);
 
   const isTrackingEnabled =

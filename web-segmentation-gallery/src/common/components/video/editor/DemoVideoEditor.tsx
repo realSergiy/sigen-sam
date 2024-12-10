@@ -17,7 +17,7 @@ import TrackletsAnnotation from '@/common/components/annotations/TrackletsAnnota
 import useCloseSessionBeforeUnload from '@/common/components/session/useCloseSessionBeforeUnload';
 import MessagesSnackbar from '@/common/components/snackbar/MessagesSnackbar';
 import useMessagesSnackbar from '@/common/components/snackbar/useDemoMessagesSnackbar';
-import {OBJECT_TOOLBAR_INDEX} from '@/common/components/toolbar/ToolbarConfig';
+import { OBJECT_TOOLBAR_INDEX } from '@/common/components/toolbar/ToolbarConfig';
 import useToolbarTabs from '@/common/components/toolbar/useToolbarTabs';
 import VideoFilmstripWithPlayback from '@/common/components/video/VideoFilmstripWithPlayback';
 import {
@@ -26,15 +26,16 @@ import {
   SessionStartedEvent,
   TrackletsEvent,
 } from '@/common/components/video/VideoWorkerBridge';
+import { INFERENCE_API_ENDPOINT, VIDEO_API_ENDPOINT } from '@/demo/DemoConfig';
 import VideoEditor from '@/common/components/video/editor/VideoEditor';
 import useResetDemoEditor from '@/common/components/video/editor/useResetEditor';
 import useVideo from '@/common/components/video/editor/useVideo';
 import InteractionLayer from '@/common/components/video/layers/InteractionLayer';
-import {PointsLayer} from '@/common/components/video/layers/PointsLayer';
+import { PointsLayer } from '@/common/components/video/layers/PointsLayer';
 import LoadingStateScreen from '@/common/loading/LoadingStateScreen';
 import UploadLoadingScreen from '@/common/loading/UploadLoadingScreen';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {SegmentationPoint} from '@/common/tracker/Tracker';
+import { SegmentationPoint } from '@/common/tracker/Tracker';
 import {
   activeTrackletObjectIdAtom,
   frameIndexAtom,
@@ -48,52 +49,16 @@ import {
   uploadingStateAtom,
   VideoData,
 } from '@/demo/atoms';
-import useSettingsContext from '@/settings/useSettingsContext';
-import {color, spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-import {useAtom, useAtomValue, useSetAtom} from 'jotai';
-import {useEffect, useState} from 'react';
-import type {ErrorObject} from 'serialize-error';
 
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'auto',
-    width: '100%',
-    borderColor: color['gray-800'],
-    backgroundColor: color['gray-800'],
-    borderWidth: 8,
-    borderRadius: 12,
-    '@media screen and (max-width: 768px)': {
-      // on mobile, we want to grow the editor container so that the editor
-      // fills the remaining vertical space between the navbar and bottom
-      // of the page
-      flexGrow: 1,
-      borderWidth: 0,
-      borderRadius: 0,
-      paddingBottom: spacing[4],
-    },
-  },
-  loadingScreenWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    background: 'white',
-    overflow: 'hidden',
-    overflowY: 'auto',
-    zIndex: 999,
-  },
-});
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import type { ErrorObject } from 'serialize-error';
 
 type Props = {
   video: VideoData;
 };
 
-export default function DemoVideoEditor({video: inputVideo}: Props) {
-  const {settings} = useSettingsContext();
+export default function DemoVideoEditor({ video: inputVideo }: Props) {
   const video = useVideo();
 
   const [isSessionStartFailed, setIsSessionStartFailed] =
@@ -117,14 +82,14 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
     null,
   );
 
-  const {isMobile} = useScreenSize();
+  const { isMobile } = useScreenSize();
 
   const [tabIndex] = useToolbarTabs();
-  const {enqueueMessage} = useMessagesSnackbar();
+  const { enqueueMessage } = useMessagesSnackbar();
 
   useCloseSessionBeforeUnload();
 
-  const {resetEditor, resetSession} = useResetDemoEditor();
+  const { resetEditor, resetSession } = useResetDemoEditor();
   useEffect(() => {
     resetEditor();
   }, [inputVideo, resetEditor]);
@@ -139,7 +104,7 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
     video?.addEventListener('frameUpdate', onFrameUpdate);
 
     function onSessionStarted(event: SessionStartedEvent) {
-      setSession({id: event.sessionId, ranPropagation: false});
+      setSession({ id: event.sessionId, ranPropagation: false });
     }
 
     video?.addEventListener('sessionStarted', onSessionStarted);
@@ -167,7 +132,7 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
     video?.addEventListener('renderingError', onRenderingError);
 
     video?.initializeTracker('SAM 2', {
-      inferenceEndpoint: settings.inferenceAPIEndpoint,
+      inferenceEndpoint: INFERENCE_API_ENDPOINT,
     });
 
     video?.startSession(inputVideo.path);
@@ -187,8 +152,6 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
     resetSession,
     inputVideo,
     video,
-    settings.inferenceAPIEndpoint,
-    settings.videoAPIEndpoint,
   ]);
 
   async function handleOptimisticPointUpdate(newPoints: SegmentationPoint[]) {
@@ -262,7 +225,7 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
   return (
     <>
       {(isVideoLoading || session === null) && !isSessionStartFailed && (
-        <div {...stylex.props(styles.loadingScreenWrapper)}>
+        <div className="absolute left-0 top-0 z-[999] h-full w-full overflow-hidden overflow-y-auto bg-white">
           <LoadingStateScreen
             title="Loading demo..."
             description="This may take a few moments, you're almost there!"
@@ -270,36 +233,37 @@ export default function DemoVideoEditor({video: inputVideo}: Props) {
         </div>
       )}
       {isSessionStartFailed && (
-        <div {...stylex.props(styles.loadingScreenWrapper)}>
+        <div className="absolute left-0 top-0 z-[999] h-full w-full overflow-hidden overflow-y-auto bg-white">
           <LoadingStateScreen
             title="Did we just break the internet?"
             description={
               <>Uh oh, it looks like there was an issue starting a session.</>
             }
-            linkProps={{to: '..', label: 'Back to homepage'}}
+            linkProps={{ to: '..', label: 'Back to homepage' }}
           />
         </div>
       )}
       {isMobile && renderingError != null && (
-        <div {...stylex.props(styles.loadingScreenWrapper)}>
+        <div className="absolute left-0 top-0 z-[999] h-full w-full overflow-hidden overflow-y-auto bg-white">
           <LoadingStateScreen
             title="Well, this is embarrassing..."
             description="This demo is not optimized for your device. Please try again on a different device with a larger screen."
-            linkProps={{to: '..', label: 'Back to homepage'}}
+            linkProps={{ to: '..', label: 'Back to homepage' }}
           />
         </div>
       )}
       {uploadingState !== 'default' && (
-        <div {...stylex.props(styles.loadingScreenWrapper)}>
+        <div className="absolute left-0 top-0 z-[999] h-full w-full overflow-hidden overflow-y-auto bg-white">
           <UploadLoadingScreen />
         </div>
       )}
-      <div {...stylex.props(styles.container)}>
+      <div className="flex w-full flex-col overflow-auto bg-gray-800 pb-4 md:grow-0 md:rounded-xl md:border-8 md:border-gray-800 md:pb-0">
         <VideoEditor
           video={inputVideo}
           layers={layers}
-          loading={session == null}>
-          <div className="bg-graydark-800 w-full">
+          loading={session == null}
+        >
+          <div className="w-full bg-graydark-800">
             <VideoFilmstripWithPlayback />
             <TrackletsAnnotation />
           </div>

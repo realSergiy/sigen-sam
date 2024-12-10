@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {LOG_LEVEL} from './LogEnvironment';
+import { LOG_LEVEL } from './LogEnvironment';
 
 /** Signature of a logging function */
 export type LogFn = {
@@ -40,8 +40,8 @@ export class ConsoleLogger implements Logger {
   readonly error: LogFn;
   readonly debug: LogFn;
 
-  constructor(options?: {level?: LogLevel}) {
-    const {level} = options || {};
+  constructor(options?: { level?: LogLevel }) {
+    const { level } = options || {};
 
     // eslint-disable-next-line no-console
     this.error = console.error.bind(console);
@@ -78,4 +78,6 @@ export class ConsoleLogger implements Logger {
   }
 }
 
-export default new ConsoleLogger({level: LOG_LEVEL});
+const logger = new ConsoleLogger({ level: LOG_LEVEL });
+
+export default logger;

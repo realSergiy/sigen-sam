@@ -18,7 +18,7 @@
  */
 
 import Logger from '@/common/logger/Logger';
-import {uuidv4} from '@/common/utils/uuid';
+import { uuidv4 } from '@/common/utils/uuid';
 import invariant from 'invariant';
 
 export type Request<A, P> = {
@@ -87,7 +87,7 @@ export class Stats {
 
     const onMessage = (event: MessageEvent<SetStatsCanvasResponse>) => {
       if (event.data.action === 'setStatsCanvas' && event.data.id === id) {
-        const {canvas, devicePixelRatio} = event.data;
+        const { canvas, devicePixelRatio } = event.data;
         if (type === 'fps') {
           this.fpsPanel = new Panel(
             canvas,
@@ -154,7 +154,7 @@ export class Stats {
       const id = uuidv4();
       const onMessage = (event: MessageEvent<MemoryStatsResponse>) => {
         if (event.data.action === 'memoryStats' && event.data.id === id) {
-          const {usedJSHeapSize, jsHeapSizeLimit} = event.data;
+          const { usedJSHeapSize, jsHeapSizeLimit } = event.data;
           this.memPanel?.update(
             usedJSHeapSize / 1048576,
             jsHeapSizeLimit / 1048576,

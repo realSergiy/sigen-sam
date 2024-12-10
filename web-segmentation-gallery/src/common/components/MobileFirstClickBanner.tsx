@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 import ChangeVideoModal from '@/common/components/gallery/ChangeVideoModal';
-import {DEMO_SHORT_NAME} from '@/demo/DemoConfig';
-import {spacing} from '@/theme/tokens.stylex';
-import {ImageCopy} from '@carbon/icons-react';
-import stylex from '@stylexjs/stylex';
-import {Button} from 'react-daisyui';
-
-const styles = stylex.create({
-  container: {
-    position: 'relative',
-    backgroundColor: '#000',
-    padding: spacing[5],
-    paddingVertical: spacing[6],
-    display: 'flex',
-    flexDirection: 'column',
-    gap: spacing[4],
-  },
-});
+import { DEMO_SHORT_NAME } from '@/demo/DemoConfig';
+import { ImageCopy } from '@carbon/icons-react';
+import { Button } from 'react-daisyui';
 
 export default function MobileFirstClickBanner() {
   return (
-    <div {...stylex.props(styles.container)}>
-      <div className="flex text-white text-lg">
+    <div className="relative flex flex-col gap-4 bg-black px-5 py-6">
+      <div className="flex text-lg text-white">
         Click an object in the video to start
       </div>
       <div className="text-sm text-[#A7B3BF]">
@@ -67,7 +53,8 @@ function MobileVideoGalleryModalTrigger({
       color="ghost"
       startIcon={<ImageCopy size={20} />}
       onClick={onClick}
-      className="text-white p-0">
+      className="p-0 text-white"
+    >
       Change video
     </Button>
   );

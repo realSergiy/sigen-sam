@@ -15,7 +15,7 @@
  */
 import GalleryOption from '@/common/components/options/GalleryOption';
 import UploadOption from '@/common/components/options/UploadOption';
-import {OBJECT_TOOLBAR_INDEX} from '@/common/components/toolbar/ToolbarConfig';
+import { OBJECT_TOOLBAR_INDEX } from '@/common/components/toolbar/ToolbarConfig';
 import useVideo from '@/common/components/video/editor/useVideo';
 import useScreenSize from '@/common/screen/useScreenSize';
 
@@ -23,8 +23,8 @@ type Props = {
   onTabChange: (tabIndex: number) => void;
 };
 
-export default function TryAnotherVideoSection({onTabChange}: Props) {
-  const {isMobile} = useScreenSize();
+export default function TryAnotherVideoSection({ onTabChange }: Props) {
+  const { isMobile } = useScreenSize();
   const video = useVideo();
 
   function handleVideoChange() {
@@ -38,10 +38,10 @@ export default function TryAnotherVideoSection({onTabChange}: Props) {
   if (isMobile) {
     return (
       <div className="px-8 pb-8">
-        <div className="font-medium text-gray-300 text-sm">
+        <div className="text-sm font-medium text-gray-300">
           Or, try another video
         </div>
-        <div className="flex flex-row gap-4 mt-4 w-full">
+        <div className="mt-4 flex w-full flex-row gap-4">
           <div className="flex-1">
             <UploadOption onUpload={handleVideoChange} />
           </div>
@@ -55,10 +55,10 @@ export default function TryAnotherVideoSection({onTabChange}: Props) {
 
   return (
     <div className="px-8 pb-8">
-      <div className="font-medium text-gray-300 text-base">
+      <div className="text-base font-medium text-gray-300">
         Try another video
       </div>
-      <div className="flex flex-col gap-4 mt-4">
+      <div className="mt-4 flex flex-col gap-4">
         <UploadOption onUpload={handleVideoChange} />
         <GalleryOption onChangeVideo={handleVideoChange} />
       </div>

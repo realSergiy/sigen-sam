@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-declare module "mp4box" {
+declare module 'mp4box' {
   export interface MP4MediaTrackEdit {
     media_rate_fraction: number;
     media_rate_integer: number;
@@ -111,7 +111,7 @@ declare module "mp4box" {
     constructor(
       arrayBuffer?: ArrayBuffer,
       byteOffset: number,
-      endianness: boolean
+      endianness: boolean,
     ): void;
   }
 
@@ -240,12 +240,12 @@ declare module "mp4box" {
     addSample(
       track: number,
       data: ArrayBuffer,
-      options?: SampleOptions
+      options?: SampleOptions,
     ): Sample;
     addSample(
       trackID: number,
       uint8: Uint8Array,
-      arg2: { duration: number; is_sync: boolean }
+      arg2: { duration: number; is_sync: boolean },
     ): void;
     onMoovStart?: () => void;
     onReady?: (info: MP4Info) => void;
@@ -272,7 +272,7 @@ declare module "mp4box" {
     setExtractionOptions(
       trackId: number,
       user?: unknown,
-      options?: { nbSamples?: number; rapAlignment?: number }
+      options?: { nbSamples?: number; rapAlignment?: number },
     ): void;
     getTrackById(trackId: number): Trak;
   }

@@ -27,29 +27,30 @@ import {
   SubtractFilled,
   TrashCan,
 } from '@carbon/icons-react';
-import {useAtom, useAtomValue} from 'jotai';
-import {useState} from 'react';
-import type {ButtonProps} from 'react-daisyui';
-import {Button} from 'react-daisyui';
+import { useAtom, useAtomValue } from 'jotai';
+import { useState } from 'react';
+import type { ButtonProps } from 'react-daisyui';
+import { Button } from 'react-daisyui';
 
 type Props = {
   objectId: number;
   active: boolean;
 };
 
-function CustomButton({className, ...props}: ButtonProps) {
+function CustomButton({ className, ...props }: ButtonProps) {
   return (
     <Button
       size="sm"
       color="ghost"
-      className={`font-medium border-none hover:bg-black  px-2 h-10 ${className}`}
-      {...props}>
+      className={`h-10 border-none px-2 font-medium hover:bg-black ${className}`}
+      {...props}
+    >
       {props.children}
     </Button>
   );
 }
 
-export default function ObjectActions({objectId, active}: Props) {
+export default function ObjectActions({ objectId, active }: Props) {
   const [isRemovingObject, setIsRemovingObject] = useState<boolean>(false);
   const [activeTrackId, setActiveTrackletId] = useAtom(
     activeTrackletObjectIdAtom,
@@ -86,7 +87,7 @@ export default function ObjectActions({objectId, active}: Props) {
   return (
     <div>
       {active && (
-        <div className="text-sm mt-1 leading-snug text-gray-400 hidden md:block ml-2 md:mb-4">
+        <div className="ml-2 mt-1 hidden text-sm leading-snug text-gray-400 md:mb-4 md:block">
           Select <AddFilled size={14} className="inline" /> to add areas to the
           object and <SubtractFilled size={14} className="inline" /> to remove
           areas from the object in the video. Click on an existing point to
@@ -94,7 +95,7 @@ export default function ObjectActions({objectId, active}: Props) {
         </div>
       )}
 
-      <div className="flex justify-between items-center md:mt-2 mt-0">
+      <div className="mt-0 flex items-center justify-between md:mt-2">
         {active ? (
           <PointsToggle />
         ) : (
@@ -105,7 +106,8 @@ export default function ObjectActions({objectId, active}: Props) {
             <CustomButton
               loading={isRemovingObject}
               onClick={handleRemoveObject}
-              startIcon={!isRemovingObject && <TrashCan size={24} />}>
+              startIcon={!isRemovingObject && <TrashCan size={24} />}
+            >
               <span className="hidden md:inline">Clear</span>
             </CustomButton>
           </>

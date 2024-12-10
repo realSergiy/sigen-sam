@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {atom} from 'jotai';
+import { atom } from 'jotai';
 import SelectedFrameHelper from './SelectedFrameHelper';
 
 export const selectedFrameHelperAtom = atom<SelectedFrameHelper | null>(null);

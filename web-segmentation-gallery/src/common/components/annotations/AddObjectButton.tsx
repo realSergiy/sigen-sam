@@ -15,15 +15,15 @@
  */
 import useMessagesSnackbar from '@/common/components/snackbar/useDemoMessagesSnackbar';
 import useVideo from '@/common/components/video/editor/useVideo';
-import {activeTrackletObjectIdAtom, labelTypeAtom} from '@/demo/atoms';
-import {Add} from '@carbon/icons-react';
-import {useSetAtom} from 'jotai';
+import { activeTrackletObjectIdAtom, labelTypeAtom } from '@/demo/atoms';
+import { Add } from '@carbon/icons-react';
+import { useSetAtom } from 'jotai';
 
 export default function AddObjectButton() {
   const video = useVideo();
   const setActiveTrackletId = useSetAtom(activeTrackletObjectIdAtom);
   const setLabelType = useSetAtom(labelTypeAtom);
-  const {enqueueMessage} = useMessagesSnackbar();
+  const { enqueueMessage } = useMessagesSnackbar();
 
   async function addObject() {
     enqueueMessage('addObjectClick');
@@ -37,12 +37,13 @@ export default function AddObjectButton() {
   return (
     <div
       onClick={addObject}
-      className="group flex justify-start mx-4 px-4 bg-transparent text-white !rounded-xl border-none cursor-pointer">
-      <div className="flex gap-6 items-center">
-        <div className=" group-hover:bg-graydark-700 border border-white relative h-12 w-12 md:w-20 md:h-20 shrink-0 rounded-lg flex items-center justify-center">
-          <Add size={36} className="group-hover:text-white text-gray-300" />
+      className="group mx-4 flex cursor-pointer justify-start !rounded-xl border-none bg-transparent px-4 text-white"
+    >
+      <div className="flex items-center gap-6">
+        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white group-hover:bg-graydark-700 md:h-20 md:w-20">
+          <Add size={36} className="text-gray-300 group-hover:text-white" />
         </div>
-        <div className="font-medium text-base">Add another object</div>
+        <div className="text-base font-medium">Add another object</div>
       </div>
     </div>
   );

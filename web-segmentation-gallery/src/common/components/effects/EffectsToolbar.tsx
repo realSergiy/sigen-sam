@@ -18,15 +18,15 @@ import EffectsToolbarBottomActions from '@/common/components/effects/EffectsTool
 import EffectsToolbarHeader from '@/common/components/effects/EffectsToolbarHeader';
 import HighlightEffects from '@/common/components/effects/HighlightEffects';
 import useMessagesSnackbar from '@/common/components/snackbar/useDemoMessagesSnackbar';
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function EffectsToolbar({onTabChange}: Props) {
+export default function EffectsToolbar({ onTabChange }: Props) {
   const isEffectsMessageShown = useRef(false);
-  const {enqueueMessage} = useMessagesSnackbar();
+  const { enqueueMessage } = useMessagesSnackbar();
 
   useEffect(() => {
     if (!isEffectsMessageShown.current) {
@@ -36,7 +36,7 @@ export default function EffectsToolbar({onTabChange}: Props) {
   }, [enqueueMessage]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <EffectsToolbarHeader />
       <div className="grow overflow-y-auto">
         <HighlightEffects />

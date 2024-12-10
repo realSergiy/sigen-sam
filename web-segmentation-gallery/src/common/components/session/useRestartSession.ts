@@ -23,8 +23,8 @@ import {
   labelTypeAtom,
   trackletObjectsAtom,
 } from '@/demo/atoms';
-import {useAtomValue, useSetAtom} from 'jotai';
-import {useState} from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useState } from 'react';
 
 export default function useRestartSession() {
   const [isLoading, setIsLoading] = useState<boolean>();
@@ -33,9 +33,9 @@ export default function useRestartSession() {
   const setActiveTrackletObjectId = useSetAtom(activeTrackletObjectIdAtom);
   const setTracklets = useSetAtom(trackletObjectsAtom);
   const setLabelType = useSetAtom(labelTypeAtom);
-  const {clearMessage} = useMessagesSnackbar();
+  const { clearMessage } = useMessagesSnackbar();
 
-  const {inputVideo} = useInputVideo();
+  const { inputVideo } = useInputVideo();
   const video = useVideo();
 
   async function restartSession(onRestart?: () => void) {
@@ -60,5 +60,5 @@ export default function useRestartSession() {
     setIsLoading(false);
   }
 
-  return {isLoading, restartSession};
+  return { isLoading, restartSession };
 }

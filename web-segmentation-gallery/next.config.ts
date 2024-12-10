@@ -1,17 +1,23 @@
-import type { NextConfig } from "next";
-
-//ToDo: switch to using turbo: https://nextjs.org/docs/app/api-reference/next-config-js/turbo#webpack-loaders
+import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  module: {
-    rules: [
-      {
-        test: /\.glsl$|\.frag$|\.vert$/i, //ToDo: try to test for ?raw instead like vite does
-        use: ["raw-loader"],
-      },
-    ],
+  compiler: {
+    relay: {
+      // This should match relay.config.js
+      src: './src/',      
+      language: 'typescript',
+      eagerEsModules: true,
+    },
   },
-  /* config options here */
+  webpack: (config, { isServer }) => {
+    // add raw-loader for glsl, frag, and vert files
+    config.module.rules.push({
+      test: /\.(glsl|frag|vert)$/,
+      use: ['raw-loader'],
+    });
+
+    return config;
+  },
 };
 
 export default nextConfig;

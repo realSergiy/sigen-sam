@@ -20,13 +20,13 @@ import {
   MORE_OPTIONS_TOOLBAR_INDEX,
   OBJECT_TOOLBAR_INDEX,
 } from '@/common/components/toolbar/ToolbarConfig';
-import {ChevronRight} from '@carbon/icons-react';
+import { ChevronRight } from '@carbon/icons-react';
 
 type Props = {
   onTabChange: (newIndex: number) => void;
 };
 
-export default function EffectsToolbarBottomActions({onTabChange}: Props) {
+export default function EffectsToolbarBottomActions({ onTabChange }: Props) {
   function handleSwitchToMoreOptionsTab() {
     onTabChange(MORE_OPTIONS_TOOLBAR_INDEX);
   }
@@ -38,7 +38,8 @@ export default function EffectsToolbarBottomActions({onTabChange}: Props) {
       />
       <PrimaryCTAButton
         onClick={handleSwitchToMoreOptionsTab}
-        endIcon={<ChevronRight />}>
+        endIcon={<ChevronRight />}
+      >
         Next
       </PrimaryCTAButton>
     </ToolbarBottomActionsWrapper>

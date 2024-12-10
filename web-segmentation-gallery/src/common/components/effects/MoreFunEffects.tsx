@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {moreEffects} from '@/common/components/effects/EffectsUtils';
+import { moreEffects } from '@/common/components/effects/EffectsUtils';
 import EffectVariantBadge from '@/common/components/effects/EffectVariantBadge';
 import ToolbarActionIcon from '@/common/components/toolbar/ToolbarActionIcon';
 import ToolbarSection from '@/common/components/toolbar/ToolbarSection';
 import useVideoEffect from '@/common/components/video/editor/useVideoEffect';
-import {EffectIndex} from '@/common/components/video/effects/Effects';
-import {activeHighlightEffectAtom} from '@/demo/atoms';
-import {useAtomValue} from 'jotai';
+import { EffectIndex } from '@/common/components/video/effects/Effects';
+import { activeHighlightEffectAtom } from '@/demo/atoms';
+import { useAtomValue } from 'jotai';
 
 export default function MoreFunEffects() {
   const setEffect = useVideoEffect();

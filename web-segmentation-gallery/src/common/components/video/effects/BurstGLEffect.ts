@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {hexToRgb} from '@/common/components/video/editor/VideoEditorUtils';
+import { hexToRgb } from '@/common/components/video/editor/VideoEditorUtils';
 import BaseGLEffect from '@/common/components/video/effects/BaseGLEffect';
 import {
   EffectFrameContext,
@@ -21,11 +21,14 @@ import {
 } from '@/common/components/video/effects/Effect';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Burst.frag';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {normalizeBounds, preAllocateTextures} from '@/common/utils/ShaderUtils';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { Tracklet } from '@/common/tracker/Tracker';
+import {
+  normalizeBounds,
+  preAllocateTextures,
+} from '@/common/utils/ShaderUtils';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class BurstGLEffect extends BaseGLEffect {
   private _numMasks: number = 0;

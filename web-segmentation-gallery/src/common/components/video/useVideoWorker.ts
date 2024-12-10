@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {RefObject, useEffect, useMemo, useRef} from 'react';
+import { RefObject, useEffect, useMemo, useRef } from 'react';
 import VideoWorkerBridge from './VideoWorkerBridge';
 
 type Options = {
@@ -36,7 +36,7 @@ type CreateWorkerBridgeFunction = (
 
 export default function useVideoWorker(
   src: string,
-  canvasRef: RefObject<HTMLCanvasElement>,
+  canvasRef: RefObject<HTMLCanvasElement | null>,
   options: Options = {},
 ) {
   const isControlTransferredToOffscreenRef = useRef(false);

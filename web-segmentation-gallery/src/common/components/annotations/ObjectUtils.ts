@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BaseTracklet} from '@/common/tracker/Tracker';
+import { BaseTracklet } from '@/common/tracker/Tracker';
 
 export function getObjectLabel(tracklet: BaseTracklet) {
   return `Object ${tracklet.id + 1}`;

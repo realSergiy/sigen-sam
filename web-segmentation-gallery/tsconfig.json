@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "strict": true,
     "plugins": [
       {
         "name": "next"
@@ -20,15 +25,26 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "mp4box": ["types/mp4box"],
-      "@/*": ["*"]
+      "mp4box": [
+        "types/mp4box"
+      ],
+      "@/*": [
+        "*"
+      ]
     }
   },
   "include": [
+    "src",
+    ".next/types/**/*.ts",
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts, types/custom.d.ts"
+    "next.config.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

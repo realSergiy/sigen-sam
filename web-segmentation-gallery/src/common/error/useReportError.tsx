@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import errorReportAtom from '@/common/error/errorReportAtom';
-import {useSetAtom} from 'jotai';
-import {useCallback} from 'react';
+import { useSetAtom } from 'jotai';
+import { useCallback } from 'react';
 
 export default function useReportError() {
   const setError = useSetAtom(errorReportAtom);

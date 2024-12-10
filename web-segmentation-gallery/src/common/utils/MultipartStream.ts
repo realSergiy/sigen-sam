@@ -187,7 +187,7 @@ export default function multipartStream(
       // The while(true) condition is required
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        const {done, value} = await reader.read();
+        const { done, value } = await reader.read();
         const buffered = buf.length - pos;
         if (done) {
           if (state != STATE_BOUNDARY || buffered > 0) {

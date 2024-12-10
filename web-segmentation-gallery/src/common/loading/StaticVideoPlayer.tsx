@@ -48,7 +48,8 @@ export default function StaticVideoPlayer({
 
   return (
     <div
-      className={`w-full relative flex flex-col ${aspect} ${containerClassName}`}>
+      className={`relative flex w-full flex-col ${aspect} ${containerClassName}`}
+    >
       <video className={`m-0 ${videoSize} ${className}`} {...props}>
         <source src={src} type="video/mp4" />
         Sorry, your browser does not support embedded videos.

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {MessagesEventMap} from '@/common/components/snackbar/DemoMessagesSnackbarUtils';
+import { MessagesEventMap } from '@/common/components/snackbar/DemoMessagesSnackbarUtils';
 import useMessagesSnackbar from '@/common/components/snackbar/useMessagesSnackbar';
-import {messageMapAtom} from '@/demo/atoms';
-import {useAtom} from 'jotai';
-import {useCallback} from 'react';
+import { messageMapAtom } from '@/demo/atoms';
+import { useAtom } from 'jotai';
+import { useCallback } from 'react';
 
 type State = {
   enqueueMessage: (messageType: keyof MessagesEventMap) => void;
@@ -26,21 +26,21 @@ type State = {
 
 export default function useDemoMessagesSnackbar(): State {
   const [messageMap, setMessageMap] = useAtom(messageMapAtom);
-  const {enqueueMessage: enqueue, clearMessage} = useMessagesSnackbar();
+  const { enqueueMessage: enqueue, clearMessage } = useMessagesSnackbar();
 
   const enqueueMessage = useCallback(
     (messageType: keyof MessagesEventMap) => {
-      const {text, shown, options} = messageMap[messageType];
+      const { text, shown, options } = messageMap[messageType];
       if (!options?.repeat && shown === true) {
         return;
       }
       enqueue(text, options);
-      const newState = {...messageMap};
+      const newState = { ...messageMap };
       newState[messageType].shown = true;
       setMessageMap(newState);
     },
     [enqueue, messageMap, setMessageMap],
   );
 
-  return {enqueueMessage, clearMessage};
+  return { enqueueMessage, clearMessage };
 }

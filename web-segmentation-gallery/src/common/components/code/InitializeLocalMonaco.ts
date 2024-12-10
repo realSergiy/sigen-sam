@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { loader } from "@monaco-editor/react";
+import { loader } from '@monaco-editor/react';
 
-import Logger from "@/common/logger/Logger";
-import * as monaco from "monaco-editor";
-import editorWorker from "monaco-editor/esm/vs/editor/editor.worker";
-import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker";
+import Logger from '@/common/logger/Logger';
+import * as monaco from 'monaco-editor';
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker';
+import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker';
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
-    if (label === "typescript" || label === "javascript") {
+    if (label === 'typescript' || label === 'javascript') {
       return new tsWorker();
     }
     return new editorWorker();
@@ -31,8 +31,8 @@ self.MonacoEnvironment = {
 
 loader.config({ monaco });
 
-loader.init().then((monaco) => {
-  Logger.debug("initialized monaco", monaco);
+loader.init().then(monaco => {
+  Logger.debug('initialized monaco', monaco);
 });
 
 //ToDo: fix to webpack initialization https://github.com/microsoft/monaco-editor/tree/main or remove monaco

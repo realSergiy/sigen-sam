@@ -20,11 +20,11 @@ import {
 } from '@/common/components/video/effects/Effect';
 import fragmentShaderSource from '@/common/components/video/effects/shaders/Arrow.frag';
 import vertexShaderSource from '@/common/components/video/effects/shaders/DefaultVert.vert';
-import {Tracklet} from '@/common/tracker/Tracker';
-import {normalizeBounds} from '@/common/utils/ShaderUtils';
-import {RLEObject, decode} from '@/jscocotools/mask';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { normalizeBounds } from '@/common/utils/ShaderUtils';
+import { RLEObject, decode } from '@/jscocotools/mask';
 import invariant from 'invariant';
-import {CanvasForm} from 'pts';
+import { CanvasForm } from 'pts';
 
 export default class ArrowGLEffect extends BaseGLEffect {
   private _numMasks: number = 0;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {PropsWithChildren} from 'react';
+import { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -34,7 +34,8 @@ export default function Tooltip({
   return (
     <div
       className={`lg:tooltip tooltip-${position} ${className}`}
-      data-tip={message}>
+      data-tip={message}
+    >
       {children}
     </div>
   );

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {SAM2Model} from './SAM2Model';
+import { SAM2Model } from './SAM2Model';
 
-export type Headers = {[name: string]: string};
+export type Headers = { [name: string]: string };
 
 export type TrackerOptions = {
   inferenceEndpoint: string;

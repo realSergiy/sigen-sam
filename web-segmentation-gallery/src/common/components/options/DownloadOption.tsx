@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Package} from '@carbon/icons-react';
+import { Package } from '@carbon/icons-react';
 import OptionButton from './OptionButton';
 import useDownloadVideo from './useDownloadVideo';
 
 export default function DownloadOption() {
-  const {download, state} = useDownloadVideo();
+  const { download, state } = useDownloadVideo();
 
   return (
     <OptionButton

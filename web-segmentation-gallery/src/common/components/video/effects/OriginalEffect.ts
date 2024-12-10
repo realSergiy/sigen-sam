@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Tracklet} from '@/common/tracker/Tracker';
-import {CanvasForm} from 'pts';
-import {AbstractEffect, EffectFrameContext} from './Effect';
+import { Tracklet } from '@/common/tracker/Tracker';
+import { CanvasForm } from 'pts';
+import { AbstractEffect, EffectFrameContext } from './Effect';
 
 export default class OriginalEffect extends AbstractEffect {
   constructor() {

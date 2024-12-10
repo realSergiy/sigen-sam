@@ -1,50 +1,13 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import PlaybackButton from '@/common/components/button/PlaybackButton';
 import VideoFilmstrip from '@/common/components/video/filmstrip/VideoFilmstrip';
-import {spacing, w} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    alignItems: 'end',
-    gap: spacing[4],
-    paddingHorizontal: spacing[4],
-    width: '100%',
-  },
-  playbackButtonContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: w[12],
-    height: w[12],
-  },
-  filmstripContainer: {
-    flexGrow: 1,
-  },
-});
 
 export default function VideoFilmstripWithPlayback() {
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.playbackButtonContainer)}>
+    <div className="flex w-full items-end gap-4 px-4">
+      <div className="flex h-12 w-12 items-center justify-center">
         <PlaybackButton />
       </div>
-      <div {...stylex.props(styles.filmstripContainer)}>
+      <div className="flex-grow">
         <VideoFilmstrip />
       </div>
     </div>

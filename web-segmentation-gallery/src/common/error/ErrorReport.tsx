@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {getErrorTitle} from '@/common/error/ErrorUtils';
+import { getErrorTitle } from '@/common/error/ErrorUtils';
 import errorReportAtom from '@/common/error/errorReportAtom';
 import emptyFunction from '@/common/utils/emptyFunction';
-import {BugAntIcon} from '@heroicons/react/24/outline';
-import {Editor} from '@monaco-editor/react';
-import {useAtom} from 'jotai';
-import {useEffect, useRef} from 'react';
-import {Button, Modal} from 'react-daisyui';
+import { BugAntIcon } from '@heroicons/react/24/outline';
+import { Editor } from '@monaco-editor/react';
+import { useAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
+import { Button, Modal } from 'react-daisyui';
 
 type Props = {
   onReport?: (error: Error) => void;
 };
 
-export default function ErrorReport({onReport = emptyFunction}: Props) {
+export default function ErrorReport({ onReport = emptyFunction }: Props) {
   const [error, setError] = useAtom(errorReportAtom);
   const errorModalRef = useRef<HTMLDialogElement>(null);
 
@@ -83,8 +83,9 @@ export default function ErrorReport({onReport = emptyFunction}: Props) {
       <Modal.Actions>
         <Button
           color="error"
-          startIcon={<BugAntIcon className="w-4 h-4" />}
-          onClick={handleReport}>
+          startIcon={<BugAntIcon className="h-4 w-4" />}
+          onClick={handleReport}
+        >
           Report
         </Button>
         <Button onClick={handleCloseModal}>Close</Button>

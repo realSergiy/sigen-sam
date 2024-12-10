@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import GradientBorder from '@/common/components/button/GradientBorder';
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 
 type Props = {
   disabled?: boolean;
@@ -30,8 +30,9 @@ export default function PrimaryCTAButton({
   return (
     <GradientBorder disabled={disabled}>
       <button
-        className={`btn ${disabled && 'btn-disabled'} !rounded-full !bg-black !text-white !border-none`}
-        {...props}>
+        className={`btn ${disabled && 'btn-disabled'} !rounded-full !border-none !bg-black !text-white`}
+        {...props}
+      >
         {children}
         {endIcon != null && endIcon}
       </button>

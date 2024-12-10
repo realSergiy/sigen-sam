@@ -1,57 +1,14 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import {DemoVideoGalleryQuery} from '@/common/components/gallery/__generated__/DemoVideoGalleryQuery.graphql';
+import { DemoVideoGalleryQuery } from '@/common/components/gallery/__generated__/DemoVideoGalleryQuery.graphql';
 import VideoGalleryUploadVideo from '@/common/components/gallery/VideoGalleryUploadPhoto';
 import VideoPhoto from '@/common/components/gallery/VideoPhoto';
 import useScreenSize from '@/common/screen/useScreenSize';
-import {VideoData} from '@/demo/atoms';
-import {DEMO_SHORT_NAME} from '@/demo/DemoConfig';
-import {fontSize, fontWeight, spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-import {useMemo} from 'react';
-import PhotoAlbum, {Photo, RenderPhotoProps} from 'react-photo-album';
-import {graphql, useLazyLoadQuery} from 'react-relay';
-import {useLocation, useNavigate} from 'react-router-dom';
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginHorizontal: spacing[1],
-    height: '100%',
-    lineHeight: 1.2,
-    paddingTop: spacing[8],
-  },
-  headerContainer: {
-    marginBottom: spacing[8],
-    fontWeight: fontWeight['medium'],
-    fontSize: fontSize['2xl'],
-    '@media screen and (max-width: 768px)': {
-      marginTop: spacing[0],
-      marginBottom: spacing[8],
-      marginHorizontal: spacing[4],
-      fontSize: fontSize['xl'],
-    },
-  },
-  albumContainer: {
-    flex: '1 1 0%',
-    width: '100%',
-    overflowY: 'auto',
-  },
-});
+import { type VideoData, navigationVideoAtom } from '@/demo/atoms';
+import { DEMO_SHORT_NAME } from '@/demo/DemoConfig';
+import { useMemo } from 'react';
+import PhotoAlbum, { Photo, RenderPhotoProps } from 'react-photo-album';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { useRouter } from 'next/navigation';
+import { useSetAtom } from 'jotai';
 
 type Props = {
   showUploadInGallery?: boolean;
@@ -74,9 +31,9 @@ export default function DemoVideoGallery({
   onUploadStart,
   onUploadError,
 }: Props) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const {isMobile: isMobileScreenSize} = useScreenSize();
+  const router = useRouter();
+  const setNavigationVideo = useSetAtom(navigationVideoAtom);
+  const { isMobile: isMobileScreenSize } = useScreenSize();
 
   const data = useLazyLoadQuery<DemoVideoGalleryQuery>(
     graphql`
@@ -137,8 +94,8 @@ export default function DemoVideoGallery({
     photo: video,
     imageProps,
   }: RenderPhotoProps<VideoPhotoData>) => {
-    const {style} = imageProps;
-    const {url, posterUrl} = video;
+    const { style } = imageProps;
+    const { url, posterUrl } = video;
 
     return video.isUploadOption ? (
       <VideoGalleryUploadVideo
@@ -153,11 +110,8 @@ export default function DemoVideoGallery({
         poster={posterUrl}
         style={style}
         onClick={() => {
-          navigate(location.pathname, {
-            state: {
-              video,
-            },
-          });
+          setNavigationVideo(video);
+          router.push(location.pathname);
           onSelect?.(video);
         }}
       />
@@ -165,21 +119,18 @@ export default function DemoVideoGallery({
   };
 
   function handleUploadVideo(video: VideoData) {
-    navigate(location.pathname, {
-      state: {
-        video,
-      },
-    });
+    setNavigationVideo(video);
+    router.push(location.pathname);
     onUpload?.(video);
   }
 
   const descriptionStyle = 'text-sm md:text-base text-gray-400 leading-snug';
 
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.albumContainer)}>
-        <div className="pt-0 md:px-16 md:pt-8 md:pb-8">
-          <div {...stylex.props(styles.headerContainer)}>
+    <div className="mx-4 flex h-full flex-col pt-32 leading-tight">
+      <div className="w-full flex-1 overflow-y-auto">
+        <div className="pt-0 md:px-16 md:pb-8 md:pt-8">
+          <div className="mb-32 text-2xl font-medium md:mx-16 md:mb-32 md:mt-0 md:text-xl">
             <h3 className="mb-2">
               Select a video to try{' '}
               <span className="hidden md:inline">

@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {CarouselContainerShadow} from '@/common/components/effects/EffectsCarouselShadow';
-import {DemoEffect} from '@/common/components/effects/EffectsUtils';
+import { CarouselContainerShadow } from '@/common/components/effects/EffectsCarouselShadow';
+import { DemoEffect } from '@/common/components/effects/EffectsUtils';
 import useVideoEffect from '@/common/components/video/editor/useVideoEffect';
-import type {EffectIndex} from '@/common/components/video/effects/Effects';
-import {Effects} from '@/common/components/video/effects/Effects';
-import {color, fontSize, spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
+import type { EffectIndex } from '@/common/components/video/effects/Effects';
+import { Effects } from '@/common/components/video/effects/Effects';
 
 type Props = {
   label: string;
@@ -27,28 +25,6 @@ type Props = {
   activeEffect: keyof Effects;
   index: EffectIndex;
 };
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: spacing[2],
-    width: '100%',
-  },
-  label: {
-    fontSize: fontSize['xs'],
-    color: '#A6ACB2',
-    textAlign: 'center',
-  },
-  carouselContainer: {
-    position: 'relative',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    width: '100%',
-    height: '120px',
-    backgroundColor: color['gray-700'],
-  },
-});
 
 export default function EffectsCarousel({
   label,
@@ -59,26 +35,28 @@ export default function EffectsCarousel({
   const setEffect = useVideoEffect();
 
   return (
-    <div {...stylex.props(styles.container)}>
-      <div {...stylex.props(styles.label)}>{label}</div>
-      <div {...stylex.props(styles.carouselContainer)}>
+    <div className="flex w-full flex-col gap-2 p-2">
+      <div className="text-center text-xs text-[#A6ACB2]">{label}</div>
+      <div className="h-30 relative w-full overflow-hidden rounded-lg bg-gray-700">
         <CarouselContainerShadow isTop={true} />
-        <div className="carousel carousel-vertical w-full h-full text-white">
+        <div className="carousel carousel-vertical h-full w-full text-white">
           <div className={`carousel-item h-6`} />
-          {effects.map(({effectName, Icon, title}, index) => {
+          {effects.map(({ effectName, Icon, title }, index) => {
             const isActive = activeEffect === effectName;
             return (
               <div
                 key={index}
-                className={`carousel-item flex items-center h-6 gap-2 px-4`}
-                onClick={() => setEffect(effectName, effectIndex)}>
+                className={`carousel-item flex h-6 items-center gap-2 px-4`}
+                onClick={() => setEffect(effectName, effectIndex)}
+              >
                 <Icon
                   color={isActive ? '#FB73A5' : undefined}
                   size={18}
                   fontWeight={10}
                 />
                 <div
-                  className={`text-sm ${isActive ? 'text-[#FB73A5] font-bold' : 'font-medium'}`}>
+                  className={`text-sm ${isActive ? 'font-bold text-[#FB73A5]' : 'font-medium'}`}
+                >
                   {title}
                 </div>
               </div>

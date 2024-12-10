@@ -16,20 +16,7 @@
 import TrackletSwimlane from '@/common/components/annotations/TrackletSwimlane';
 import useTracklets from '@/common/components/annotations/useTracklets';
 import useVideo from '@/common/components/video/editor/useVideo';
-import {BaseTracklet} from '@/common/tracker/Tracker';
-import {m, spacing} from '@/theme/tokens.stylex';
-import stylex from '@stylexjs/stylex';
-
-const styles = stylex.create({
-  container: {
-    marginTop: m[3],
-    height: 75,
-    paddingHorizontal: spacing[4],
-    '@media screen and (max-width: 768px)': {
-      height: 25,
-    },
-  },
-});
+import { BaseTracklet } from '@/common/tracker/Tracker';
 
 export default function TrackletsAnnotation() {
   const video = useVideo();
@@ -42,7 +29,7 @@ export default function TrackletsAnnotation() {
   }
 
   return (
-    <div {...stylex.props(styles.container)}>
+    <div className="flex flex-col bg-gray-800 p-4 text-gray-100">
       {tracklets.map(tracklet => (
         <TrackletSwimlane
           key={tracklet.id}

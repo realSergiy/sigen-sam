@@ -16,7 +16,7 @@
 import CreateFilmstripError from '@/graphql/errors/CreateFilmstripError';
 import DrawFrameError from '@/graphql/errors/DrawFrameError';
 import WebGLContextError from '@/graphql/errors/WebGLContextError';
-import {deserializeError, type ErrorObject} from 'serialize-error';
+import { deserializeError, type ErrorObject } from 'serialize-error';
 
 export type RenderingErrorType =
   | 'webgl_context'
@@ -52,7 +52,7 @@ export function getRenderErrorType(error?: ErrorObject): RenderingErrorType {
  * console.log(title); // 'This is the title'
  * ```
  */
-export function getErrorTitle({message}: Error): string {
+export function getErrorTitle({ message }: Error): string {
   const idx = message.indexOf('\n');
   return idx < 0 ? message : message.substring(0, idx);
 }
