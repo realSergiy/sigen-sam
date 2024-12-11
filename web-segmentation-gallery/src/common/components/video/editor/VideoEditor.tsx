@@ -1,7 +1,9 @@
+'use client';
+
 import { VideoData } from '@/demo/atoms';
 import { useSetAtom } from 'jotai';
 import { PropsWithChildren, useEffect, useRef } from 'react';
-import Video, { VideoRef } from '../Video';
+import Video, { VideoRef, VideoRefHandle } from '../Video';
 import { videoAtom } from './atoms';
 
 export type ControlsProps = {
@@ -24,16 +26,16 @@ export default function VideoEditor({
   loading,
   children,
 }: Props) {
-  const videoRef = useRef<VideoRef>(null);
+  const videoRef = useRef<VideoRefHandle>(null);
   const setVideo = useSetAtom(videoAtom);
 
   // Initialize video atom
   useEffect(() => {
-    setVideo(videoRef.current);
+    setVideo(videoRef.current ? videoRef.current.handle : null);
     return () => {
       setVideo(null);
     };
-  }, [setVideo]);
+  }, [setVideo, videoRef.current]);
 
   return (
     <div className="relative flex h-full w-full flex-col items-center overflow-clip rounded-md md:overflow-visible">

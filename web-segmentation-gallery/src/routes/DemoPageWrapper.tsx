@@ -8,7 +8,9 @@ import { VIDEO_API_ENDPOINT } from '@/demo/DemoConfig';
 import DemoSuspenseFallback from '@/demo/DemoSuspenseFallback';
 import DemoErrorFallback from '@/demo/DemoErrorFallback';
 
+/*
 const REQUIRED_WINDOW_APIS = ['VideoEncoder', 'VideoDecoder', 'VideoFrame'];
+
 
 function isBrowserSupported() {
   for (const api of REQUIRED_WINDOW_APIS) {
@@ -27,8 +29,9 @@ function isBrowserSupported() {
 
   return true;
 }
-
+*/
 export default function DemoPageWrapper() {
+  /*
   const isBrowserUnsupported = !isBrowserSupported();
 
   if (isBrowserUnsupported && isFirefox) {
@@ -66,7 +69,7 @@ export default function DemoPageWrapper() {
       />
     );
   }
-
+*/
   return (
     <RelayEnvironmentProvider
       endpoint={VIDEO_API_ENDPOINT}

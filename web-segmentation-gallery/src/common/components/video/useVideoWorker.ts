@@ -1,19 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import { RefObject, useEffect, useMemo, useRef } from 'react';
+'use client';
+
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import VideoWorkerBridge from './VideoWorkerBridge';
 
 type Options = {
@@ -52,17 +39,24 @@ export default function useVideoWorker(
     ) as Required<Options>;
   }, [options]);
 
-  const worker = useMemo(() => {
-    if (mergedOptions.createWorkerBridge) {
-      return mergedOptions.createWorkerBridge(mergedOptions.createVideoWorker);
-    }
-    return VideoWorkerBridge.create(mergedOptions.createVideoWorker);
+  const [worker, setWorker] = useState<VideoWorkerBridge>();
+
+  useEffect(() => {
+    // Thi will on in the browser.
+    const bridge = mergedOptions.createWorkerBridge
+      ? mergedOptions.createWorkerBridge(mergedOptions.createVideoWorker)
+      : VideoWorkerBridge.create(mergedOptions.createVideoWorker);
+    setWorker(bridge);
   }, [mergedOptions]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
 
     if (canvas == null) {
+      return;
+    }
+
+    if (worker == null) {
       return;
     }
 
@@ -81,7 +75,7 @@ export default function useVideoWorker(
   }, [canvasRef, mergedOptions, worker]);
 
   useEffect(() => {
-    worker.setSource(src);
+    worker?.setSource(src);
   }, [src, worker]);
 
   return worker;

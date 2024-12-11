@@ -1,3 +1,5 @@
+'use client';
+
 import { BaseTracklet, SegmentationPoint } from '@/common/tracker/Tracker';
 import { TrackerOptions, Trackers } from '@/common/tracker/Trackers';
 import { PauseFilled, PlayFilledAlt } from '@carbon/icons-react';
@@ -36,6 +38,10 @@ type Props = {
   canvasWidthStyle?: string;
   controls?: boolean;
   createVideoWorker?: () => Worker;
+};
+
+export type VideoRefHandle = {
+  handle: VideoRef | null;
 };
 
 export type VideoRef = {
@@ -79,7 +85,7 @@ export type VideoRef = {
   getWorker_ONLY_USE_WITH_CAUTION(): Worker;
 };
 
-export default forwardRef<VideoRef, Props>(function Video(
+export default forwardRef<VideoRefHandle, Props>(function Video(
   {
     src,
     width,
@@ -115,111 +121,127 @@ export default forwardRef<VideoRef, Props>(function Video(
   useImperativeHandle(
     ref,
     () => ({
-      getCanvas() {
-        return canvasRef.current;
-      },
-      get width() {
-        return bridge.width;
-      },
-      get height() {
-        return bridge.width;
-      },
-      get frame() {
-        return bridge.frame;
-      },
-      set frame(index: number) {
-        bridge.frame = index;
-      },
-      get numberOfFrames() {
-        return bridge.numberOfFrames;
-      },
-      play(): void {
-        bridge.play();
-      },
-      pause(): void {
-        bridge.pause();
-      },
-      stop(): void {
-        bridge.stop();
-      },
-      previousFrame(): void {
-        bridge.previousFrame();
-      },
-      nextFrame(): void {
-        bridge.nextFrame();
-      },
-      setEffect(
-        name: keyof Effects,
-        index: number,
-        options?: EffectOptions,
-      ): void {
-        bridge.setEffect(name, index, options);
-      },
-      encode(): void {
-        bridge.encode();
-      },
-      streamMasks(): void {
-        bridge.streamMasks();
-      },
-      abortStreamMasks(): Promise<void> {
-        return bridge.abortStreamMasks();
-      },
-      addEventListener<K extends keyof VideoWorkerEventMap>(
-        type: K,
-        listener: (ev: VideoWorkerEventMap[K]) => unknown,
-      ): void {
-        bridge.addEventListener(type, listener);
-      },
-      removeEventListener<K extends keyof VideoWorkerEventMap>(
-        type: K,
-        listener: (ev: VideoWorkerEventMap[K]) => unknown,
-      ): void {
-        bridge.removeEventListener(type, listener);
-      },
-      createFilmstrip(width: number, height: number): Promise<ImageBitmap> {
-        return bridge.createFilmstrip(width, height);
-      },
-      // Tracker
-      initializeTracker(name: keyof Trackers, options: TrackerOptions): void {
-        bridge.initializeTracker(name, options);
-      },
-      startSession(videoUrl: string): Promise<string | null> {
-        return bridge.startSession(videoUrl);
-      },
-      closeSession(): void {
-        bridge.closeSession();
-      },
-      logAnnotations(): void {
-        bridge.logAnnotations();
-      },
-      createTracklet(): Promise<BaseTracklet> {
-        return bridge.createTracklet();
-      },
-      deleteTracklet(trackletId: number): Promise<void> {
-        return bridge.deleteTracklet(trackletId);
-      },
-      updatePoints(trackletId: number, points: SegmentationPoint[]): void {
-        bridge.updatePoints(trackletId, points);
-      },
-      clearPointsInVideo(): Promise<boolean> {
-        return bridge.clearPointsInVideo();
-      },
-      getWorker_ONLY_USE_WITH_CAUTION() {
-        return bridge.getWorker_ONLY_USE_WITH_CAUTION();
-      },
+      handle: bridge
+        ? {
+            getCanvas() {
+              return canvasRef.current;
+            },
+            get width() {
+              return bridge.width;
+            },
+            get height() {
+              return bridge.width;
+            },
+            get frame() {
+              return bridge.frame;
+            },
+            set frame(index: number) {
+              bridge.frame = index;
+            },
+            get numberOfFrames() {
+              return bridge.numberOfFrames;
+            },
+            play(): void {
+              bridge.play();
+            },
+            pause(): void {
+              bridge.pause();
+            },
+            stop(): void {
+              bridge.stop();
+            },
+            previousFrame(): void {
+              bridge.previousFrame();
+            },
+            nextFrame(): void {
+              bridge.nextFrame();
+            },
+            setEffect(
+              name: keyof Effects,
+              index: number,
+              options?: EffectOptions,
+            ): void {
+              bridge.setEffect(name, index, options);
+            },
+            encode(): void {
+              bridge.encode();
+            },
+            streamMasks(): void {
+              bridge.streamMasks();
+            },
+            abortStreamMasks(): Promise<void> {
+              return bridge.abortStreamMasks();
+            },
+            addEventListener<K extends keyof VideoWorkerEventMap>(
+              type: K,
+              listener: (ev: VideoWorkerEventMap[K]) => unknown,
+            ): void {
+              bridge.addEventListener(type, listener);
+            },
+            removeEventListener<K extends keyof VideoWorkerEventMap>(
+              type: K,
+              listener: (ev: VideoWorkerEventMap[K]) => unknown,
+            ): void {
+              bridge.removeEventListener(type, listener);
+            },
+            createFilmstrip(
+              width: number,
+              height: number,
+            ): Promise<ImageBitmap> {
+              return bridge.createFilmstrip(width, height);
+            },
+            // Tracker
+            initializeTracker(
+              name: keyof Trackers,
+              options: TrackerOptions,
+            ): void {
+              bridge.initializeTracker(name, options);
+            },
+            startSession(videoUrl: string): Promise<string | null> {
+              return bridge.startSession(videoUrl);
+            },
+            closeSession(): void {
+              bridge.closeSession();
+            },
+            logAnnotations(): void {
+              bridge.logAnnotations();
+            },
+            createTracklet(): Promise<BaseTracklet> {
+              return bridge.createTracklet();
+            },
+            deleteTracklet(trackletId: number): Promise<void> {
+              return bridge.deleteTracklet(trackletId);
+            },
+            updatePoints(
+              trackletId: number,
+              points: SegmentationPoint[],
+            ): void {
+              bridge.updatePoints(trackletId, points);
+            },
+            clearPointsInVideo(): Promise<boolean> {
+              return bridge.clearPointsInVideo();
+            },
+            getWorker_ONLY_USE_WITH_CAUTION() {
+              return bridge.getWorker_ONLY_USE_WITH_CAUTION();
+            },
+          }
+        : null,
     }),
     [bridge],
   );
 
   // Handle video playback events (get playback state to main thread)
   useEffect(() => {
+    if (!bridge) {
+      return;
+    }
     let isPlaying = false;
 
     function onFocus() {
       // Workaround for Safari where the video frame renders black on
       // unknown events. Trigger re-render frame on focus.
       if (!isPlaying) {
-        bridge.goToFrame(bridge.frame);
+        bridge?.goToFrame(bridge.frame);
       }
     }
 
@@ -228,7 +250,7 @@ export default forwardRef<VideoRef, Props>(function Video(
       // visibility change hidden. Returning to visible shows a black
       // frame instead of rendering the current frame.
       if (document.visibilityState === 'visible' && !isPlaying) {
-        bridge.goToFrame(bridge.frame);
+        bridge?.goToFrame(bridge.frame);
       }
     }
 
@@ -250,7 +272,7 @@ export default forwardRef<VideoRef, Props>(function Video(
     function onStreamingDone(event: StreamingStateUpdateEvent) {
       // continue to play after streaming is done (state is "full")
       if (event.state === 'full') {
-        bridge.play();
+        bridge?.play();
       }
     }
 
@@ -312,7 +334,7 @@ export default forwardRef<VideoRef, Props>(function Video(
               )
             }
             onClick={() => {
-              isPlaying ? bridge.pause() : bridge.play();
+              isPlaying ? bridge?.pause() : bridge?.play();
             }}
           />
         </div>

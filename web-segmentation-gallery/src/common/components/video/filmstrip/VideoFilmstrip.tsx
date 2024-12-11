@@ -1,3 +1,5 @@
+'use client';
+
 import SelectedFrameHelper from '@/common/components/video/filmstrip/SelectedFrameHelper';
 import { isPlayingAtom } from '@/demo/atoms';
 import { useAtomValue, useSetAtom } from 'jotai';

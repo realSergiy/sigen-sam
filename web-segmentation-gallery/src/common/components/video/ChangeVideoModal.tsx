@@ -1,3 +1,5 @@
+'use client';
+
 import type { VideoGalleryTriggerProps } from '@/common/components/gallery/DemoVideoGalleryModal';
 import DemoVideoGalleryModal from '@/common/components/gallery/DemoVideoGalleryModal';
 import useVideo from '@/common/components/video/editor/useVideo';
