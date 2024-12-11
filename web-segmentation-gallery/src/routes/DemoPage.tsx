@@ -1,3 +1,5 @@
+'use client';
+
 import Toolbar from '@/common/components/toolbar/Toolbar';
 import DemoVideoEditor from '@/common/components/video/editor/DemoVideoEditor';
 import useInputVideo from '@/common/components/video/useInputVideo';
@@ -8,6 +10,8 @@ import { DemoPageQuery } from '@/routes/__generated__/DemoPageQuery.graphql';
 import { useAtomValue } from 'jotai';
 import { useEffect, useMemo } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
+
+export const dynamic = 'force-dynamic';
 
 export default function DemoPage() {
   const data = useLazyLoadQuery<DemoPageQuery>(

@@ -1,3 +1,5 @@
+'use client';
+
 import DefaultVideoGalleryModalTrigger from '@/common/components/gallery/DefaultVideoGalleryModalTrigger';
 import {
   frameIndexAtom,
