@@ -2,8 +2,7 @@ services:
   frontend:
     image: sam2/frontend
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: ./frontend      
     ports:
       - 7262:80
     environment:
@@ -13,8 +12,7 @@ services:
   backend_vid:
     image: sam2/backend_vid
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: ./backend-vid      
     ports:
       - 7264:5000
     volumes:
@@ -39,8 +37,7 @@ services:
   backend_inf:
     image: sam2/backend_inf
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: ./backend-inf      
     ports:
       - 7265:5000
     volumes:
